@@ -74,11 +74,23 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | **Part** | **Amount Used** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|:--:|
 | 3 in 1 kit | 1 | kit includes majority of the materials used to build the car | $69.99 | <a href="https://www.sunfounder.com/products/sunfounder-3-in-1-iot-smart-car-learning-ultimate-starter-kit"> Link </a> |
-| half sized breadboard | 1 | most components reside here | $6.99 | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/](https://www.amazon.com/DEYUE-breadboard-Set-Prototype-Board/dp/B07LFD4LT6/ref=sr_1_5?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.OVjKxIeCVYNU10JQfr5F6xG-vHw-BjGUMjXarhDZV6SfhzbbpyaLfDx_YoTfuRBtDvoFgI-O5RlwoAqxruW54kUgKCosnFw5PookczumSEHN2fcG7ZeMO9YrkjcHO3aWHbNMuQi7pYNXyFRjS53Y4_u7lJ-aOkHyATjjMtCrb6KcX259wK7Mi7Ga6uZtbhsHRciS18MbzilPQVByR2iMDUFpIh1_X7u-zzdJBs1TWPc.B_gI1SvrzH61RVDUf6cZuoKmMHZL_0IK8kogO8hVMtQ&dib_tag=se&keywords=half+size+breadboard&plpRedirect=mhFallback&qid=1784306456&sr=8-5"> Link </a> |
-| RGB LED | 2 | switches colors while lighting up, decorative purposes | $8.99 | <a href="amazon.com/EDGELEC-Tri-Color-Multicolor-Diffused-Resistors/dp/B077XGF3YR/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.BU4S0jVgvYFMaG3YX-8kv1-vTtV1-4Gj3Hi14qSCx07ecsaGTDoA1Hxw0Fg6sGxubCpTxWGF42A8j1evBEgIvH_FlcmgyidZiEnOakrQta6QfwOnnl-ZQOHwG3TMUHtETFsTPO4UKFgpdhWi1_AsiILIepaAREjx9IWxz-zxf1RYDV50_9qySpUzZljrQC5cbYliQJ-TfgFzZcfSxYTzP_A3s6ooSxL9QfiVliMQWK0.mG1exndiac7e2Czayq2kQDl7GdEQZWy7eeEvsmS-dVs&dib_tag=se&keywords=rgb+led&plpRedirect=mhFallback&qid=1784306996&sr=8-3"> Link </a> |
+| acrylic plate | 1 | main body for components to reside on, structural support |  |  |
 | Arduino Uno R3 | 1 | reads inputs, proccess data according to code, control outputs  |  |  |
-| 9V battery| | 1 | power supply |  |  |
-| mini breadboard | extra space for wiring components |  |  |
+| 9V battery| 1 | power supply |  |  |
+| 9V battery cable | 1 | connects battery to the Arduino |  |  |
+| L9110 motor driver | 1 | control speed and direction of motors |  |  |
+| TT motor | 2 | convert electrical energy into mechanical energy to drive wheels |  |  |
+| TT wheel | 2 | rotates to drive the car |  |  |
+| 1" universal wheel | 1 | third wheel for balance, can rotate 360º |  |  |
+| IR remote control | 1 | operates the car and sends binary code to a receiver |  |  |
+| IR receiver | 1 | receives the signal from the remote |  |  |
+| half sized breadboard | 1 | most components reside here | $6.99 | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/](https://www.amazon.com/DEYUE-breadboard-Set-Prototype-Board/dp/B07LFD4LT6/ref=sr_1_5?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.OVjKxIeCVYNU10JQfr5F6xG-vHw-BjGUMjXarhDZV6SfhzbbpyaLfDx_YoTfuRBtDvoFgI-O5RlwoAqxruW54kUgKCosnFw5PookczumSEHN2fcG7ZeMO9YrkjcHO3aWHbNMuQi7pYNXyFRjS53Y4_u7lJ-aOkHyATjjMtCrb6KcX259wK7Mi7Ga6uZtbhsHRciS18MbzilPQVByR2iMDUFpIh1_X7u-zzdJBs1TWPc.B_gI1SvrzH61RVDUf6cZuoKmMHZL_0IK8kogO8hVMtQ&dib_tag=se&keywords=half+size+breadboard&plpRedirect=mhFallback&qid=1784306456&sr=8-5"> Link </a> |
+| mini breadboard | 1 | extra space for wiring components |  |  |
+| RGB LED | 2 | switches colors while lighting up, decorative purposes | $8.99 | <a href="amazon.com/EDGELEC-Tri-Color-Multicolor-Diffused-Resistors/dp/B077XGF3YR/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.BU4S0jVgvYFMaG3YX-8kv1-vTtV1-4Gj3Hi14qSCx07ecsaGTDoA1Hxw0Fg6sGxubCpTxWGF42A8j1evBEgIvH_FlcmgyidZiEnOakrQta6QfwOnnl-ZQOHwG3TMUHtETFsTPO4UKFgpdhWi1_AsiILIepaAREjx9IWxz-zxf1RYDV50_9qySpUzZljrQC5cbYliQJ-TfgFzZcfSxYTzP_A3s6ooSxL9QfiVliMQWK0.mG1exndiac7e2Czayq2kQDl7GdEQZWy7eeEvsmS-dVs&dib_tag=se&keywords=rgb+led&plpRedirect=mhFallback&qid=1784306996&sr=8-3"> Link </a> |
+| blue LED | 2 | connected to pin 13, flashes when IR receiver gets a signal |  |  |
+| white LED | 2 | behaves similar to a car's turn signals |  |  |
+| ultrasonic sensor (HC-SR04) | 1 | detects distance via echolocation |  |  |
+| IR obstacle avoidance module | 2 | detects nearby objects by emitting and receiving IR light |  |  |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
