@@ -99,6 +99,9 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | nuts (M3) | 6 | clamp components |  |  |
 | standoffs (M3x24mm, M3x12mm, M2.5x11mm) | 4 each | behaves similar to a car's turn signals |  |  |
 | velcro (1in strip) | 2 | attach components while allowing for easy removal |  |  |
+| screw driver | 1 | screwing in screws, adjusting potentiometers |  |  |
+| USB-A to USB-B cable | 1 | connect Arduino to computer |  |  |
+| USB-B to USB-C adapter | 1 | connect the cable to computer port |  |  |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
