@@ -92,7 +92,7 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | ultrasonic sensor (HC-SR04) | 1 | detects distance via echolocation |  |  |
 | IR obstacle avoidance module | 2 | detects nearby objects by emitting and receiving IR light |  |  |
 | passive piezo buzzer | 1 | produces sound and is able to change pitch |  |  |
-| shift register (74HC595) | 1 | expands the digital pin count |  |  |
+| shift register (74HC595) | 1 | expands number of digital output pins |  |  |
 | resistors (330Ω, 1kΩ, 2kΩ, 5kΩ) | 2, 4, 2, 2 respectively  | prevent components from getting damaged |  |  |
 
 # Other Resources/Examples
