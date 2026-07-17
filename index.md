@@ -6,7 +6,7 @@ Replace this text with a brief description (2-3 sentences) of your project. This
 |:--:|:--:|:--:|:--:|
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
-(Alina F.heic)
+![Headstone Image](Alina F.heic)
   
 # Final Milestone
 
