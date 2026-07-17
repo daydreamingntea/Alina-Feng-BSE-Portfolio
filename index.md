@@ -91,6 +91,7 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | white LED | 2 | behaves similar to a car's turn signals |  |  |
 | ultrasonic sensor (HC-SR04) | 1 | detects distance via echolocation |  |  |
 | IR obstacle avoidance module | 2 | detects nearby objects by emitting and receiving IR light |  |  |
+| passive piezo buzzer | 1 | produces sound and is able to change pitch |  |  |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
