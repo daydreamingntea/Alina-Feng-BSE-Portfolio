@@ -94,6 +94,11 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | passive piezo buzzer | 1 | produces sound and is able to change pitch |  |  |
 | shift register (74HC595) | 1 | expands number of digital output pins |  |  |
 | resistors (330Ω, 1kΩ, 2kΩ, 5kΩ) | 2, 4, 2, 2 respectively  | prevent components from getting damaged |  |  |
+| jumper wires (M-M & F-M) | 20 & 6 respectively | create electrical connections |  |  |
+| screws (M3x6mm & M2.5x6mm)  | 22 & 8 respectively | fasten components |  |  |
+| nuts (M3) | 6 | clamp components |  |  |
+| standoffs (M3x24mm, M3x12mm, M2.5x11mm) | 4 each | behaves similar to a car's turn signals |  |  |
+| velcro (1in strip) | 2 | attach components while allowing for easy removal |  |  |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
