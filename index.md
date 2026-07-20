@@ -97,11 +97,11 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | jumper wires (M-M & F-M) | 20 & 6 respectively | create electrical connections |  |  |
 | screws (M3x6mm & M2.5x6mm)  | 22 & 8 respectively | fasten components |  |  |
 | nuts (M3) | 6 | clamp components |  |  |
-| standoffs (M3x24mm, M3x12mm, M2.5x11mm) | 4 each | behaves similar to a car's turn signals |  |  |
+| standoffs (M3x24mm, M3x12mm, M2.5x11mm) | 4 each | elevate certain components |  |  |
 | velcro (1in strip) | 2 | attach components while allowing for easy removal |  |  |
 | screw driver | 1 | screwing in screws, adjusting potentiometers |  |  |
 | USB-A to USB-B cable | 1 | connect Arduino to computer |  |  |
-| USB-B to USB-C adapter | 1 | connect the cable to computer port |  |  |
+| USB-B to USB-C adapter | 1 | connect the cable to computer port |  | <a href="amazon.com/Syntech-Adapter-Thunderbolt-Compatible-MacBook/dp/B07CVX3516/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.d7LKMhCLqwSoIHvDHsmfNNASCcVrrSwIS4h1KNDXWaRlfv0Af9ia70iXoIl6q9XTGAAwQLY_Mqrql2JI0XznGBRShN8fWvmudbknWJjx-Cap4A_2fsLNIYGaT3qJ5T9uXpjI_nG7pi_OTwSYGeLWBtEhwgsFeNQeNk24qXI_nkghOiFOH-1DVKolZwrI3KQOInaAGnf8V-C1FKPEwEY_bQyMn8Fk7zb5oI00bNkg9fk.HC8ik8XHZQiflxFCElxXHv1JYhxPqz-lKOqaUxmfI1k&dib_tag=se&keywords=usb+b+to+usb+c+adapter&plpRedirect=mhFallback&qid=1784572867&sr=8-3"> Link </a> |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
