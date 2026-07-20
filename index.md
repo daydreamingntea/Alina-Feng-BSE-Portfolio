@@ -6,7 +6,9 @@ Replace this text with a brief description (2-3 sentences) of your project. This
 |:--:|:--:|:--:|:--:|
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
-![Headstone Image](Alina F.png)
+![Headstone Image](Alina F.heic)
+
+<img src = "Alina F.png" width = "450" height = "600">
   
 # Final Milestone
 
