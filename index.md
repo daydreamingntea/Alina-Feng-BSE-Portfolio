@@ -1,4 +1,4 @@
-# Project Name Here
+# Human Pestering Robot
 Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!
 
 
@@ -7,20 +7,24 @@ Replace this text with a brief description (2-3 sentences) of your project. This
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
 <img src = "Alina F.png" width = "450" height = "600">
+
+# Key Takeaways
+
+Summary of challenges and triumphs
+Key topics I learned about
+What I hope to learn in the future
   
 # Final Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZbtA5DcNpWU?si=88WjiowESC8bPYQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+In this final milestone, I added back the sensors that were previously removed (IR obstacle avoidance, HC-SR04 ultrasonic sensor, line tracking). I was debating about removing the line tracking module since it would open up more digital pins that I could use for other components (LEDs and piezo buzzer). I spent some time playing around with the layout of the LEDs before deciding I wanted to add two RGB LEDs. At first, I had them connected to the analog pins and gave them a code so that they will continously change color once turned on. The code has each hue choose randomly between 0 and 255. Occasionally, all the values land on 255 which results in the LED appearing off. I was considering altering the code so this doesn't happen, but decided against it since I was already satisfied with how it worked. Two white LEDs were added to function as the car's turn signals. When a button for the car to turn is pressed, the corresponding LED will be set to true and the other will be false. 
 
-For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
+After wiring the sensors, I began to play around with each one individually before combining everything into one code. This phase consisted of many frustrations as the sensor would appear to not be working or detecting anything. I added in multiple serial printing functions so I could see if the sensor was detecting anything at all in the serial monitor. After that, I find out if the issue was in the software or hardware. For the IR obstacle avoidance modules, I had a software issue and adjusted the code so the sensor would get priority over the other functions in the car when the sensors were active. As for the ultrasonic module, I connected the ground and power wires into a different area on the breadboard. 
 
+When it came to testing the robot using the combined code (this includes all the sensors and LEDs), the car would not be able to drive at all but I could hear the motors attempting to turn. Perhaps the motor controller was taking up too much power, so a seperate battery was added for the motor controller (this consisted of three AAA batteries) and I had the 9V battery replaced. This did allow the car to drive normally but the motor controller would overheat. The second battery was removed and the motor controller stopped overheating. Thankfully the car was still able to drive normally since the old 9V battery was replaced. 
 
+Unfortunately, the Arduino did not have enough digital pins for the next two components I wanted add: a passive piezo buzzer and a LED connected to pin 13 (the LED will light up everytime the IR reciever gets a signal from the remote). I began to research different components that would expand the number of digital pins available before settling on the 74HC595 shift register (which came with this kit). Since the half sized breadboard was already a bit crowded, I put the shift register on a mini breadboard instead. This way I could also avoid having to rearrange components on the half sized breadboard. The shift register requires connections to three digital pins on the Arduino and opens up eight more digital pins, but the pins on the shift register are not PWM pins nor input pins. I decided to rearrange the pin connections so I could have the two white LEDs and one RGB LED on the shift register and move one of the pins from the ultrasonic sensor to an analog pin along with the piezo buzzer. The three pins from the shift register are connect to pins 2, ~3, and 4. Moving the white LEDs also opened up pin 13, so I chose to connect two blue LEDs to that pin with LED feedback enabled. Now, when the IR receiver gets a signal, they will light up.
 
 # Second Milestone
 
