@@ -10,9 +10,7 @@ Replace this text with a brief description (2-3 sentences) of your project. This
 
 # Key Takeaways
 
-Summary of challenges and triumphs
-Key topics I learned about
-What I hope to learn in the future
+During my time at BlueStamp, I expanded on my existing knowledge of the Arduino and circuit design. I had worked with sensors and components that I wasn't familar with. On top of that, I had to code in order for everything to work. Learning to code is something that I always despised and I certainly did not want to learn how to code just for this project. I ended up using Claude to write out the base code (since I am not familar with the format of coding) before making changes myself. Everytime a problem arose, my first instinct is to isolate certain variables and narrow down the issue (this method has served me well in this project). As for other skills I gained, I also learned to create schematics in Tinkercad and Fritzing (plus figuring out how to download Fritzing from Github). For the future, I hope to expand my knowledge of circuit components and familiarize myself with the art of problem solving.  
   
 # Final Milestone
 
