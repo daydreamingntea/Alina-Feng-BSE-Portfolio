@@ -43,6 +43,8 @@ On the bottom of the acrylic plate, two motors are mounted with two TT wheels at
 
 Basic wire setup for the car has also been completed in this milestone. The wires from the TT motors has been connected to the motor controller and is secured using screws. Jumper wires connect the pins from the motor controller to the Arduino, this will enable the wheels to rotate and move the car. Pins A-1B, A-1A, B-2A, and B-1A are connected to digital pins 5, 6, 9, and 10 respectively. These pins are responsible for the wheels' direction of rotation and thus, the direction the car drives in. 
 
+As for why I chose this project, I wanted to expand on my Arduino knowledge and familiarize myself with other circuit components. This project is relatively simple and did not require the use of hazardous tools, which meant that I have extra time and room to add my own modifications while staying safe. Plus, I could design this robot to pester my friends and family (this is the internal motivation for doing this project). 
+
 # Starter Project
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pxxaiZzEqbY?si=YBfAkAmAtdKXfj1w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
