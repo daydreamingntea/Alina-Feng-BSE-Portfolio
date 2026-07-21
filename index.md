@@ -97,7 +97,7 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | passive piezo buzzer | 1 | produces sound and is able to change pitch |  |  |
 | shift register (74HC595) | 1 | expands number of digital output pins |  |  |
 | resistors (330Ω, 1kΩ, 2kΩ, 5kΩ) | 2, 4, 2, 2 respectively  | prevent components from getting damaged |  |  |
-| jumper wires (M-M & F-M) | 20 & 6 respectively | create electrical connections |  |  |
+| jumper wires (M-M & F-M) | 20 & 12 respectively | create electrical connections |  |  |
 | screws (M3x6mm & M2.5x6mm)  | 22 & 8 respectively | fasten components |  |  |
 | nuts (M3) | 6 | clamp components |  |  |
 | standoffs (M3x24mm, M3x12mm, M2.5x11mm) | 4 each | elevate certain components |  |  |
