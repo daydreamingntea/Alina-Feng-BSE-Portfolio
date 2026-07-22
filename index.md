@@ -53,7 +53,17 @@ The weevil eye uses a photoresistor (adjusts resistance inverse to the amount of
 
 
 # Schematics 
-Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
+
+Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself, some wires are striped to help differentiate between wires of other components along with ground and power. This schematic uses a L293D motor driver to mimic the wire placement on the L9110 motor driver since it could not find it in Fritzing.
+
+Breadboard view:
+<img width="1927" height="2843" alt="annoy_ppl_bb" src="https://github.com/user-attachments/assets/d29946c2-08b1-4d49-9d20-120fcfc3a707" />
+
+Schematic view:
+<img width="2806" height="1509" alt="annoy_ppl_schem" src="https://github.com/user-attachments/assets/1de8e15e-7df2-4925-923c-9a0101b8218f" />
+
+PCB view:
+<img width="2471" height="975" alt="annoy_ppl_pcb" src="https://github.com/user-attachments/assets/054297fc-252f-4239-ac55-eb5604067436" />
 
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
