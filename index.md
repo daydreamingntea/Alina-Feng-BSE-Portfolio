@@ -58,13 +58,13 @@ The weevil eye uses a photoresistor (adjusts resistance inverse to the amount of
 Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself, some wires are striped to help differentiate between wires of other components along with ground and power. This schematic uses a L293D motor driver to mimic the wire placement on the L9110 motor driver since it could not find it in Fritzing.
 
 Breadboard view:
-<img width="1927" height="2843" alt="annoy_ppl_bb" src="https://github.com/user-attachments/assets/d29946c2-08b1-4d49-9d20-120fcfc3a707" />
+<img src="https://github.com/user-attachments/assets/d29946c2-08b1-4d49-9d20-120fcfc3a707" alt="annoy_ppl_bb" style="max-width: 100%; height: auto; display: block;" />
 
 Schematic view:
-<img width="2806" height="1509" alt="annoy_ppl_schem" src="https://github.com/user-attachments/assets/1de8e15e-7df2-4925-923c-9a0101b8218f" />
+<img src="https://github.com/user-attachments/assets/1de8e15e-7df2-4925-923c-9a0101b8218f" alt="annoy_ppl_schem" style="max-width: 100%; height: auto; display: block;" />
 
 PCB view:
-<img width="2471" height="975" alt="annoy_ppl_pcb" src="https://github.com/user-attachments/assets/054297fc-252f-4239-ac55-eb5604067436" />
+<img src="https://github.com/user-attachments/assets/054297fc-252f-4239-ac55-eb5604067436" alt="annoy_ppl_pcb" style="max-width: 100%; height: auto; display: block;" />
 
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
