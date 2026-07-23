@@ -857,6 +857,16 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 [RGB LED in Tinkercad](https://www.tinkercad.com/things/fMiUiPWqtO9-rgb-led)
 
 [L9110 Motor Driver](https://docs.sunfounder.com/projects/3in1-kit-v2/en/latest/components/component_l9110_module.html)
+
+[Passive Piezo Buzzer](https://uk.rs-online.com/web/content/discovery/ideas-and-advice/how-do-piezo-buzzers-work)
+
+[Ultrasonic Sensor (HC-SR04)](https://docs.sunfounder.com/projects/ultimate-sensor-kit/en/latest/components_basic/01-component_ultrasonic_module.html)
+
+[IR Obstacle Avoidance Module](https://docs.sunfounder.com/projects/ultimate-sensor-kit/en/latest/components_basic/09-component_ir_obstacle.html)
+
+[IR Receiver](https://www.electronicsforu.com/technology-trends/learn-electronics/ir-led-infrared-sensor-basics)
+
+[Project Notebook](https://docs.google.com/document/d/1CKAgA1Z3KnM4e_xub-k0-8ildSCVjZ5tO_CuyvIDajk/edit?tab=t.0)
   
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
