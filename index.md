@@ -116,13 +116,31 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | USB-A to USB-B cable | 1 | connect Arduino to computer |  |  |
 | USB-B to USB-C adapter | 1 | connect the cable to computer port | $6.99 | <a href="https://www.amazon.com/Syntech-Adapter-Thunderbolt-Compatible-MacBook/dp/B07CVX3516/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.d7LKMhCLqwSoIHvDHsmfNNASCcVrrSwIS4h1KNDXWaRlfv0Af9ia70iXoIl6q9XTGAAwQLY_Mqrql2JI0XznGBRShN8fWvmudbknWJjx-Cap4A_2fsLNIYGaT3qJ5T9uXpjI_nG7pi_OTwSYGeLWBtEhwgsFeNQeNk24qXI_nkghOiFOH-1DVKolZwrI3KQOInaAGnf8V-C1FKPEwEY_bQyMn8Fk7zb5oI00bNkg9fk.HC8ik8XHZQiflxFCElxXHv1JYhxPqz-lKOqaUxmfI1k&dib_tag=se&keywords=usb%2Bb%2Bto%2Busb%2Bc%2Badapter&plpRedirect=mhFallback&qid=1784572867&sr=8-3&th=1"> Link </a> |
 
-# Remote Key
+# Remote Control
 
 Below is the layout of the IR remote used for this robot. I included the names of each button based on their names in the code along with their function.
 
-<img width="1080" height="700" alt="1" src="https://github.com/user-attachments/assets/f68db58c-9c46-4341-9038-b9d3403809eb" />
-<img width="1080" height="700" alt="2" src="https://github.com/user-attachments/assets/6887b40e-1f98-458b-967d-b5f4911c616a" />
+| | | |
+| :--- | :---: | ---: |
+| **Power** (lock all other buttons)| **Mode** (+500Hz for buzzer) | **Mute** (-500Hz for buzzer) |
+| **Play/Pause** (play R2D2 sounds) | **Backward** (enable IR obstacle avoidance) | **Forward** (enable ultrasonic sensor) |
+| **EQ** (follow an object) | **Minus** (-25 speed) | **Plus** (+25 speed) |
+| **0** (stop any non-numbered commands) | **Cycle** (play buzzer) | **U/SD** (self-driving mode) |
+| **1** (turn left front) | **2** (drive forward) | **3** (turn right front) |
+| **4** (rotate counter clockwise) | **5** (enable RGB LED) | **6** (rotate clockwise) |
+| **7** (turn left back) | **8** (drive backward) | **9** (turn right back) |
+| | | |
 
+**A few things to note:**
+ - pressing POWER once will lock all other buttons, pressing it again will unlock
+     - pressing POWER will also terminate any already running commands
+ - pressing + too many times will not cause the car greatly increase in speed
+     - speed is capped at 255
+     - car will not be able to drive once speed is at 100 or lower
+ - if PLAY/PAUSE is pressed while CYCLE is running, the R2D2 sound will play
+     - buzzer sound will resume once R2D2 sound is completed
+ - buttons may be continously pressed to run a command
+  
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
 - [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
