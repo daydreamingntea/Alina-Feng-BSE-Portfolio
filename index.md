@@ -123,15 +123,15 @@ Below is the layout of the IR remote used for this robot. I included the names o
 | | | |
 | :--- | :---: | ---: |
 | **Power** (lock all other buttons)| **Mode** (+500Hz for buzzer) | **Mute** (-500Hz for buzzer) |
-| **Play/Pause** (play R2D2 sounds) | **Backward** (enable IR obstacle avoidance) | **Forward** (enable ultrasonic sensor) |
-| **EQ** (follow an object) | **Minus** (-25 speed) | **Plus** (+25 speed) |
-| **0** (stop any non-numbered commands) | **Cycle** (play buzzer) | **U/SD** (self-driving mode) |
+| **Play/Pause** (play R2D2 sounds) | **Backward** (enable IR obstacle avoidance mode) | **Forward** (enable ultrasonic sensor distance detection mode) |
+| **EQ** (follow an object mode) | **Minus** (-25 speed) | **Plus** (+25 speed) |
+| **0** (stop/reset any non-numbered commands) | **Cycle** (play buzzer) | **U/SD** (self-driving mode) |
 | **1** (turn left front) | **2** (drive forward) | **3** (turn right front) |
 | **4** (rotate counter clockwise) | **5** (enable RGB LED) | **6** (rotate clockwise) |
 | **7** (turn left back) | **8** (drive backward) | **9** (turn right back) |
 | | | |
 
-**A few things to note:**
+**Side notes:**
  - pressing POWER once will lock all other buttons, pressing it again will unlock
      - pressing POWER will also terminate any already running commands
  - pressing + too many times will not cause the car greatly increase in speed
@@ -139,7 +139,14 @@ Below is the layout of the IR remote used for this robot. I included the names o
      - car will not be able to drive once speed is at 100 or lower
  - if PLAY/PAUSE is pressed while CYCLE is running, the R2D2 sound will play
      - buzzer sound will resume once R2D2 sound is completed
- - buttons may be continously pressed to run a command
+ - buttons may be held down while pressed to run a command continously for the driving functions
+ - for other buttons it will cause the function to switch on and off rapidly
+ - passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
+ - blue LED lights will flash to indicate a remote press is being registered
+ - most universal MP3 IR remotes with 21 keys should work for the robot
+ - if more than one mode is enabled at once, the car may not drive
+     - 0 may be pressed to reset the car for commands to proceed
+ - avoid spamming different buttons that might cause the car's commands to clash or contradict
   
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
