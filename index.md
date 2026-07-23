@@ -66,20 +66,750 @@ PCB view:
 <img src="https://github.com/user-attachments/assets/054297fc-252f-4239-ac55-eb5604067436" alt="annoy_ppl_pcb" style="max-width: 100%; height: auto; display: block;" />
 
 # Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
+Arduino IDE (version 2.3.10) was used to run the code.
 ```c++
+#include <IRremote.h>
+#include <EEPROM.h>
+
+// IR receiver pin
+const int IR_RECEIVE_PIN = 12; 
+
+// motor pins
+const int A_1B = 5;
+const int A_1A = 6;
+const int B_1B = 9;
+const int B_1A = 10;
+
+// 74HC595 shift register control pins
+const int SR_DATA  = 3;  // SER = 14
+const int SR_LATCH = 4;  // RCLK = 12
+const int SR_CLOCK = 2;  // SRCLK = 11
+
+// bit positions of each device on the shift register's output byte (Q0..Q7)
+const byte SR_RIGHT_LED = 2;  // Q0 (acutal position, but defining it as 2 makes it work)
+const byte SR_LEFT_LED  = 1;  // Q1 
+const byte SR_RGB_R     = 4;  // Q3 (acutal position, but defining it as 4 makes it work) [2nd RGB - red]
+const byte SR_RGB_G     = 5;  // Q4 (actual position, but defining it as 5 makes it work) [2nd RGB - green]
+const byte SR_RGB_B     = 6;  // Q5 (actual position, but defining it as 6 makes it work) [2nd RGB - blue]
+
+byte srState = 0;  // current state of all 8 shift register outputs
+
+// direct Arduino pins for timing-critical devices
+const int trigPin = A5;   
+const int echoPin = 11;   
+const int buzzerPin = A4; 
+
+// IR obstacle avoidance modules pins
+const int rightIR = 7;
+const int leftIR = 8;
+
+// 1st RGB LED remains on analog/PWM pins
+#define LEDR A0
+#define LEDG A1
+#define LEDB A2
+
+int speed = 150;
+String flag = "NONE";
+
+// calibration multipliers
+float leftOffset = 1.0;
+float rightOffset = 1.0;
+
+// RGB state
+bool rgbOn = false;              
+unsigned long lastColorChange = 0;
+const unsigned long holdTime = 500;  // ms to stay on each color before changing
+
+int r, g, b, r2, g2, b2;
+
+// buzzer state (continuous buzz, triggered by CYCLE)
+int buzzerFreq = 1000;          // starting/default tone frequency in Hz
+const int buzzerMinFreq = 100;  // setting boundaries for frequency
+const int buzzerMaxFreq = 10000; 
+
+bool buzzerOn = false;           // continuous buzz toggled by CYCLE, stopped by 0
+bool buzzerState = false;        // current HIGH/LOW state
+unsigned long lastBuzzerToggle = 0;  // micros() timestamp of last edge
+
+// power lock state
+// when locked, every button except power is ignored and all behaviors are frozen
+bool locked = false;
+
+const int DEFAULT_SPEED = 150;  // speed to reset to on every power press
+
+// R2D2 sound engine is non-blocking, no tone() used anywhere
+// calling tone() knocks IR remote's timer out of sync and the remote stops responding
+// generating the waveform manually (digitalWrite toggling, same trick as updateBuzzer()) avoids touching Timer2
+enum R2D2EventType { R2D2_SWEEP, R2D2_STACCATO, R2D2_PAUSE, R2D2_GROAN };
+
+struct R2D2Event {
+  R2D2EventType type;
+  int startFreq;          // starting frequency (Hz) for SWEEP/GROAN/STACCATO
+  int endFreq;             // target frequency (Hz) for SWEEP/GROAN
+  int stepIntervalMs;      // how often to advance frequency for SWEEP/GROAN
+  int freqStep;            // amount to change frequency per step (+ for sweep, - for groan)
+  unsigned long durationMs; // total duration for STACCATO/PAUSE
+};
+
+const int R2D2_MAX_EVENTS = 16;
+R2D2Event r2d2Sequence[R2D2_MAX_EVENTS];
+int r2d2EventCount = 0;
+int r2d2CurrentEvent = -1;    // -1 = no sequence running
+bool r2d2Active = false;
+bool r2d2WasBuzzing = false;  // remembers if continuous buzzer was on before we borrowed the pin
+
+unsigned long r2d2EventStartMs = 0;
+unsigned long r2d2LastFreqStepMs = 0;
+int r2d2CurrentFreq = 0;
+bool r2d2ToneState = false;
+unsigned long r2d2LastToggleUs = 0;
+
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println("Hello World!");
+
+  // motor setup
+  pinMode(A_1B, OUTPUT);
+  pinMode(A_1A, OUTPUT);
+  pinMode(B_1B, OUTPUT);
+  pinMode(B_1A, OUTPUT);
+
+  // shift register control pins setup
+  pinMode(SR_DATA, OUTPUT);
+  pinMode(SR_LATCH, OUTPUT);
+  pinMode(SR_CLOCK, OUTPUT);
+  srState = 0;
+  srUpdate();  // turn all SR outputs off initially
+
+  // direct physical pins setup (ultrasonic and buzzer)
+  pinMode(trigPin, OUTPUT); 
+  pinMode(echoPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(buzzerPin, LOW);
+
+  // IR obstacle setup
+  pinMode(leftIR, INPUT);
+  pinMode(rightIR, INPUT);
+
+  // 1st RGB LED setup
+  pinMode(LEDR, OUTPUT);
+  pinMode(LEDG, OUTPUT);
+  pinMode(LEDB, OUTPUT);
+  
+  setRGB(0, 0, 0, 0, 0, 0);  // start off
+
+  randomSeed(analogRead(A2) + micros()); // read from unused A2 for random seed
+
+  // drift correction
+  int leftEEPROM = EEPROM.read(0);
+  int rightEEPROM = EEPROM.read(1);
+
+  if (leftEEPROM == 255 || leftEEPROM == 100) leftEEPROM = 88;  // left wheel spinning faster than right
+  if (rightEEPROM == 255 || rightEEPROM == 100) rightEEPROM = 100;
+
+  // convert integers
+  leftOffset = leftEEPROM * 0.01;
+  rightOffset = rightEEPROM * 0.01;
+
+  // IR remote start
+  IrReceiver.begin(IR_RECEIVE_PIN, ENABLE_LED_FEEDBACK);  
+  Serial.println("REMOTE CONTROL START");
 }
 
+// buttons
 void loop() {
-  // put your main code here, to run repeatedly:
+  if (IrReceiver.decode()) {
+    String key = decodeKeyValue(IrReceiver.decodedIRData.command);
+    if (key != "ERROR") {
+      Serial.println(key);
 
+      if (key == "POWER") {
+        // power always works, even while locked 
+        // every press wipes any previously running command
+        resetAllSystems();
+        locked = !locked;
+        Serial.println(locked ? "LOCKED" : "UNLOCKED");
+      } else if (locked) {
+        // ignore every other button while locked
+        Serial.println("LOCKED - ignoring input");
+      } else if (key == "+") {
+        speed += 25;
+        Serial.println(speed);
+      } else if (key == "-") {
+        speed -= 25;
+        Serial.println(speed);
+      } else if (key == "5") {
+        rgbOn = !rgbOn;              // toggle RGB LEDs
+        if (rgbOn) {
+          lastColorChange = millis();
+          randomizeColors();
+          setRGB(r, g, b, r2, g2, b2);
+        } else {
+          setRGB(0, 0, 0, 0, 0, 0);  // turn both off
+        }
+      } else if (key == "2") {
+        moveForward(speed);
+        delayWithBuzzer(1000);
+      } else if (key == "1") {
+        moveLeft(speed);
+        setLEDs(true, false);
+      } else if (key == "3") {
+        moveRight(speed);
+        setLEDs(false, true);
+      } else if (key == "4") {
+        turnLeft(speed);
+        setLEDs(true, false);
+      } else if (key == "6") {
+        turnRight(speed);
+        setLEDs(false, true);
+      } else if (key == "7") {
+        backLeft(speed);
+        setLEDs(true, false);
+      } else if (key == "9") {
+        backRight(speed);
+        setLEDs(false, true);
+      } else if (key == "8") {
+        moveBackward(speed);
+        delayWithBuzzer(750);
+      } else if (key == "U/SD") {
+        flag = "AUTO";
+      } else if (key == "0") {
+        flag = "NONE";
+        stopMove();
+        stopBuzzer();   // 0 silences continuous buzzer
+      } else if (key == "FORWARD") {
+        flag = "ULTR";
+      } else if (key == "BACKWARD") {
+        flag = "IROB";
+      } else if (key == "EQ") {
+        flag = "FOLW";
+      } else if (key == "CYCLE") {
+        startBuzzer();   
+      } else if (key == "MODE") {
+        buzzerFreq += 500;
+        buzzerFreq = constrain(buzzerFreq, buzzerMinFreq, buzzerMaxFreq);
+        Serial.print("Buzzer freq: "); Serial.println(buzzerFreq);
+      } else if (key == "MUTE") {
+        buzzerFreq -= 500;
+        buzzerFreq = constrain(buzzerFreq, buzzerMinFreq, buzzerMaxFreq);
+        Serial.print("Buzzer freq: "); Serial.println(buzzerFreq);
+      } else if (key == "PLAY/PAUSE") {
+        startR2D2Sequence();   // non-blocking now - kicks off the sound state machine
+      }
+
+      if (!locked) {
+        speed = constrain(speed, 0, 255);
+        delayWithBuzzer(500);
+        stopMove();
+        setLEDs(false, false);  // turn off white indicator LEDs once move ends
+      }
+    }
+    IrReceiver.resume();  
+  }
+
+  if (!locked) {
+    if (flag == "AUTO") {
+      AutoDrive(speed);
+    } else if (flag == "ULTR") {
+      ultrasonicExample(speed);
+    } else if (flag == "IROB") {
+      irobstacleExample(speed);
+    } else if (flag == "FOLW") {
+      following(speed);
+    }
+
+    // non-blocking RGB color cycling while active
+    if (rgbOn && (millis() - lastColorChange >= holdTime)) {
+      lastColorChange = millis();
+      randomizeColors();
+      setRGB(r, g, b, r2, g2, b2);
+    }
+  }
+
+  // non-blocking buzzer tone using the direct pin
+  // left running unconditionally: buzzerOn/r2d2Active are already forced false
+  // the instant we lock, so these are harmless no-ops while locked
+  updateBuzzer();
+
+  // non-blocking R2D2 sound effect (if a sequence is currently playing)
+  updateR2D2();
 }
+
+// locking
+// wipes out any command/behavior currently in progress and returns every  subsystem to a known, idle default
+void resetAllSystems() {
+  flag = "NONE";              // cancel AUTO/ULTR/IROB/FOLW modes
+  speed = DEFAULT_SPEED;      // reset speed back to default
+
+  stopMove();                 // motors off
+  setLEDs(false, false);      // white indicator LEDs off
+
+  stopBuzzer();                // continuous CYCLE buzzer off
+  r2d2Active = false;          // cancel any in-progress R2D2 chatter
+  r2d2CurrentEvent = -1;
+  r2d2EventCount = 0;
+  r2d2WasBuzzing = false;
+  digitalWrite(buzzerPin, LOW); // make sure the pin is left LOW either way
+
+  rgbOn = false;                // stop RGB color cycling
+  setRGB(0, 0, 0, 0, 0, 0);     // both RGB LEDs off
+}
+
+// shift register helpers
+void srUpdate() {
+  digitalWrite(SR_LATCH, LOW);
+  shiftOut(SR_DATA, SR_CLOCK, MSBFIRST, srState);
+  digitalWrite(SR_LATCH, HIGH);
+}
+
+void srWrite(byte bitPos, bool state) {
+  if (state) {
+    srState |= (1 << bitPos);
+  } else {
+    srState &= ~(1 << bitPos);
+  }
+  srUpdate();
+}
+
+// ultrasonic readings
+float readSensorData() {
+  // directly trigger physical pin A0
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // measure return echo with a 30ms timeout so it doesn't hang the loop
+  float distance = pulseIn(echoPin, HIGH, 30000) / 58.00;  
+  return distance;
+}
+
+// picks new random colors for RGB LEDs
+void randomizeColors() {
+  r = random(0, 255);
+  g = random(0, 255);
+  b = random(0, 255);
+
+  r2 = random(0, 255);
+  g2 = random(0, 255);
+  b2 = random(0, 255);
+}
+
+void setRGB(int r2v, int g2v, int b2v, int rv, int gv, int bv) {
+  // 2nd RGB is connected to shift register bits (Digital ON/OFF only)
+  srWrite(SR_RGB_R, r2v > 127);
+  srWrite(SR_RGB_G, g2v > 127);
+  srWrite(SR_RGB_B, b2v > 127);
+
+  // 1st RGB remains full-color on direct pins
+  analogWrite(LEDR, rv);
+  analogWrite(LEDG, gv);
+  analogWrite(LEDB, bv);
+}
+
+void setLEDs(bool leftOn, bool rightOn) {
+  srWrite(SR_LEFT_LED, leftOn);
+  srWrite(SR_RIGHT_LED, rightOn);
+}
+
+// buzzer control (continuous CYCLE buzzer)
+void startBuzzer() {
+  buzzerOn = true;
+  buzzerState = true;
+  lastBuzzerToggle = micros();
+  digitalWrite(buzzerPin, HIGH);
+}
+
+// stops the continuous buzzer and makes sure the pin is left LOW
+void stopBuzzer() {
+  buzzerOn = false;
+  buzzerState = false;
+  digitalWrite(buzzerPin, LOW);
+}
+
+// checks whether it's time to flip the buzzer pin
+// pulled out of loop() so it can also be called from delayWithBuzzer()
+// while a blocking-style delay is "waiting", this is what lets the buzzer keep sounding even when a button is pressed
+void updateBuzzer() {
+  if (buzzerOn) {
+    unsigned long halfPeriodUs = 500000UL / (unsigned long)buzzerFreq; 
+    if (micros() - lastBuzzerToggle >= halfPeriodUs) {
+      lastBuzzerToggle = micros();
+      buzzerState = !buzzerState;
+      digitalWrite(buzzerPin, buzzerState); 
+    }
+  }
+}
+
+// drop-in replacement for delay(ms) ƒor the buzzer the R2D2 sounds while time passes, instead of freezing everything
+void delayWithBuzzer(unsigned long ms) {
+  unsigned long start = millis();
+  while (millis() - start < ms) {
+    updateBuzzer();
+    updateR2D2();
+  }
+}
+
+// R2D2 sounds
+// builds one "chirp" event (either an upward pitch sweep or a quick staccato tone)
+void addR2D2Chirp() {
+  if (r2d2EventCount >= R2D2_MAX_EVENTS) return;
+  int noteType = random(0, 2);
+
+  if (noteType == 0) {
+    // upward pitch sweep (excited/questioning)
+    int startFreq = random(1000, 2000);
+    int endFreq = startFreq + random(400, 1000);
+    r2d2Sequence[r2d2EventCount++] = { R2D2_SWEEP, startFreq, endFreq, 2, 40, 0 };
+  } else {
+    // quick steady tone
+    int freq = random(800, 2500);
+    int duration = random(40, 100);
+    r2d2Sequence[r2d2EventCount++] = { R2D2_STACCATO, freq, freq, 0, 0, (unsigned long)duration };
+  }
+}
+
+// builds the low descending "sad groan" event
+void addR2D2Groan() {
+  if (r2d2EventCount >= R2D2_MAX_EVENTS) return;
+  r2d2Sequence[r2d2EventCount++] = { R2D2_GROAN, 700, 250, 4, -5, 0 };
+}
+
+// builds a random chatter sequence (chooses between excited and steady for each chrip)
+// (3-6 chirps + short gaps) followed by a groan, then lets updateR2D2() play it back a little at a time on every loop() iteration
+// updateR2D2() is called every loop and is inside delayWithBuzzer() so it can continue even when the car is driving
+void startR2D2Sequence() {
+  // if the continuous buzzer was running, pause it and hand the pin over
+  // restored automatically once the sequence finishes
+  r2d2WasBuzzing = buzzerOn;
+  if (r2d2WasBuzzing) stopBuzzer();
+
+  r2d2EventCount = 0;
+  int chatterCount = random(3, 7);
+  for (int i = 0; i < chatterCount; i++) {
+    addR2D2Chirp();
+    if (r2d2EventCount < R2D2_MAX_EVENTS) {
+      r2d2Sequence[r2d2EventCount++] = { R2D2_PAUSE, 0, 0, 0, 0, (unsigned long)random(50, 150) };
+    }
+  }
+  if (r2d2EventCount < R2D2_MAX_EVENTS) {
+    r2d2Sequence[r2d2EventCount++] = { R2D2_PAUSE, 0, 0, 0, 0, 300 }; // pause before the groan
+  }
+  addR2D2Groan();
+
+  r2d2CurrentEvent = 0;
+  r2d2Active = true;
+  r2d2BeginCurrentEvent();
+}
+
+// resets the per-event timers whenever it moves on to a new event in the sequence
+void r2d2BeginCurrentEvent() {
+  R2D2Event &e = r2d2Sequence[r2d2CurrentEvent];
+  r2d2EventStartMs = millis();
+  r2d2LastFreqStepMs = r2d2EventStartMs;
+  r2d2LastToggleUs = micros();
+  r2d2ToneState = false;
+  digitalWrite(buzzerPin, LOW);
+  r2d2CurrentFreq = e.startFreq;
+}
+
+// moves to the next event in the sequence or ends the sequence and restores the continuous buzzer if it was interrupted
+void r2d2AdvanceEvent() {
+  r2d2CurrentEvent++;
+  if (r2d2CurrentEvent >= r2d2EventCount) {
+    r2d2Active = false;
+    r2d2CurrentEvent = -1;
+    digitalWrite(buzzerPin, LOW);
+    if (r2d2WasBuzzing) startBuzzer();
+    return;
+  }
+  r2d2BeginCurrentEvent();
+}
+
+// advances whichever R2D2 event is currently playing by a tiny amount each time it's called; safe (and required) to call every loop() iteration
+void updateR2D2() {
+  if (!r2d2Active || r2d2CurrentEvent == -1) return;
+
+  R2D2Event &e = r2d2Sequence[r2d2CurrentEvent];
+  unsigned long nowMs = millis();
+
+  switch (e.type) {
+    case R2D2_PAUSE:
+      digitalWrite(buzzerPin, LOW);
+      if (nowMs - r2d2EventStartMs >= e.durationMs) r2d2AdvanceEvent();
+      break;
+
+    case R2D2_STACCATO: {
+      if (nowMs - r2d2EventStartMs >= e.durationMs) {
+        digitalWrite(buzzerPin, LOW);
+        r2d2AdvanceEvent();
+        break;
+      }
+      unsigned long halfPeriodUs = 500000UL / (unsigned long)e.startFreq;
+      if (micros() - r2d2LastToggleUs >= halfPeriodUs) {
+        r2d2LastToggleUs = micros();
+        r2d2ToneState = !r2d2ToneState;
+        digitalWrite(buzzerPin, r2d2ToneState);
+      }
+      break;
+    }
+
+    case R2D2_SWEEP:
+    case R2D2_GROAN: {
+      bool ascending = (e.freqStep > 0);
+      bool doneSweep = ascending ? (r2d2CurrentFreq >= e.endFreq) : (r2d2CurrentFreq <= e.endFreq);
+      if (doneSweep) {
+        digitalWrite(buzzerPin, LOW);
+        r2d2AdvanceEvent();
+        break;
+      }
+      if (nowMs - r2d2LastFreqStepMs >= (unsigned long)e.stepIntervalMs) {
+        r2d2LastFreqStepMs = nowMs;
+        r2d2CurrentFreq += e.freqStep;
+      }
+      unsigned long halfPeriodUs = 500000UL / (unsigned long)r2d2CurrentFreq;
+      if (micros() - r2d2LastToggleUs >= halfPeriodUs) {
+        r2d2LastToggleUs = micros();
+        r2d2ToneState = !r2d2ToneState;
+        digitalWrite(buzzerPin, r2d2ToneState);
+      }
+      break;
+    }
+  }
+}
+
+// helper function to keep calibrated speeds between 0 and 255
+int calculateSpeed(int targetSpeed, float offset) {
+  int finalSpeed = int(targetSpeed * offset);
+  return constrain(finalSpeed, 0, 255);
+}
+
+// direction of wheel rotation, direction of car
+void moveForward(int speed) {
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, calculateSpeed(speed, rightOffset));
+  analogWrite(B_1B, calculateSpeed(speed, leftOffset));
+  analogWrite(B_1A, 0);
+}
+
+void moveBackward(int speed) {
+  analogWrite(A_1B, calculateSpeed(speed, rightOffset));
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, calculateSpeed(speed, leftOffset));
+}
+
+void turnRight(int speed) {
+  analogWrite(A_1B, calculateSpeed(speed, rightOffset));
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, calculateSpeed(speed, leftOffset));
+  analogWrite(B_1A, 0);
+}
+
+void turnLeft(int speed) {
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, calculateSpeed(speed, rightOffset));
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, calculateSpeed(speed, leftOffset));
+}
+
+void moveLeft(int speed) {
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, calculateSpeed(speed, rightOffset));
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, 0);
+}
+
+void moveRight(int speed) {
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, calculateSpeed(speed, leftOffset));
+  analogWrite(B_1A, 0);
+}
+
+void backLeft(int speed) {
+  analogWrite(A_1B, calculateSpeed(speed, rightOffset));
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, 0);
+}
+
+void backRight(int speed) {
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, calculateSpeed(speed, leftOffset));
+}
+
+// left wheel slower / faster than right wheel -> curves the car left while still moving forward
+void steerLeft(int fast, int slow) {
+  // right wheel forward (slow), left wheel backward (fast) -> rotate CCW
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, slow);
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, fast);
+}
+
+void steerRight(int fast, int slow) {
+  // left wheel forward (slow), right wheel backward (fast) -> rotate CW
+  analogWrite(A_1B, fast);
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, slow);
+  analogWrite(B_1A, 0);
+}
+
+void stopMove() {
+  analogWrite(A_1B, 0);
+  analogWrite(A_1A, 0);
+  analogWrite(B_1B, 0);
+  analogWrite(B_1A, 0);
+}
+
+// self driving
+void AutoDrive(int speed) {
+  int left = digitalRead(leftIR);  // 0: Obstructed   1: Empty
+  int right = digitalRead(rightIR);
+
+  if (!left && right) {
+    backLeft(speed);
+  } else if (left && !right) {
+    backRight(speed);
+  } else if (!left && !right) {
+    moveBackward(speed);
+  } else {
+    float distance = readSensorData();
+    Serial.println(distance);
+    if (distance > 15) {  // safe
+      moveForward(150);
+    } else if (distance < 8 && distance > 2) {  // move away
+      moveBackward(150);
+      delayWithBuzzer(1000);
+      backLeft(150);
+      delayWithBuzzer(500);
+    } else {
+      moveForward(150);
+    }
+  }
+}
+
+// follow object
+// uses the ultrasonic sensor to gauge distance to the object and the two IR obstacle sensors to steer toward it
+void following(int speed) {
+  float distance = readSensorData();
+  int left = digitalRead(leftIR);   // 0: Obstructed  1: Empty
+  int right = digitalRead(rightIR);
+  int turnSpeed = 150;
+
+  Serial.print("dist: "); Serial.print(distance);
+  Serial.print(" L: "); Serial.print(left);
+  Serial.print(" R: "); Serial.println(right);
+
+  if (distance > 15) {
+    // nothing in front, use IR to steer toward it
+    if (!left && right) {
+      steerLeft(speed, turnSpeed);
+    } else if (left && !right) {
+      steerRight(speed, turnSpeed);
+    } else {
+      stopMove();
+    }
+  } else if (distance > 8) { // too close, stop
+    moveForward(speed);
+  } else {
+    stopMove(); 
+  }
+}
+
+bool obstacleDetected() {
+  int left = digitalRead(leftIR);   // 0: Obstructed   1: Empty
+  int right = digitalRead(rightIR);
+  return (!left || !right);
+}
+// IR obstacle avoidance
+void irobstacleExample(int speed) {
+  if (obstacleDetected()) {
+    stopMove();
+    Serial.println("OBSTACLE DETECTED - STOPPED");
+  } else {
+    moveForward(speed);
+  }
+}
+// ultrasonic sensor
+void ultrasonicExample(int speed) {
+  float distance = readSensorData();
+  Serial.println(distance);
+  if (distance > 15) {
+    moveForward(speed);
+  } else if (distance < 8 && distance > 2) {
+    moveBackward(speed);
+  } else {
+    stopMove();
+  }
+}
+
+// translate signal from IR receiver so it can be easily read 
+String decodeKeyValue(long result) {
+  switch(result){
+    case 0x16: return "0";
+    case 0xC:  return "1"; 
+    case 0x18: return "2"; 
+    case 0x5E: return "3"; 
+    case 0x8:  return "4"; 
+    case 0x1C: return "5"; 
+    case 0x5A: return "6"; 
+    case 0x42: return "7"; 
+    case 0x52: return "8"; 
+    case 0x4A: return "9"; 
+    case 0x9:  return "+"; 
+    case 0x15: return "-"; 
+    case 0x7:  return "EQ"; 
+    case 0xD:  return "U/SD";
+    case 0x19: return "CYCLE";         
+    case 0x44: return "PLAY/PAUSE";   
+    case 0x43: return "FORWARD";   
+    case 0x40: return "BACKWARD";   
+    case 0x45: return "POWER";   
+    case 0x47: return "MUTE";   
+    case 0x46: return "MODE";       
+    case 0x0:  return "ERROR";   
+    default :  return "ERROR";
+  }
+}
+
 ```
+
+# Remote Control
+
+Below is the layout of the IR remote used for this robot. I included the names of each button based on their names in the code along with their function.
+
+| | | |
+| :--- | :---: | ---: |
+| **Power** (lock all other buttons)| **Mode** (+500Hz for buzzer) | **Mute** (-500Hz for buzzer) |
+| **Play/Pause** (play R2D2 sounds) | **Backward** (enable IR obstacle avoidance mode) | **Forward** (enable ultrasonic sensor distance detection mode) |
+| **EQ** (follow an object mode) | **Minus** (-25 speed) | **Plus** (+25 speed) |
+| **0** (stop/reset any non-numbered commands) | **Cycle** (play buzzer) | **U/SD** (self-driving mode) |
+| **1** (turn left front) | **2** (drive forward) | **3** (turn right front) |
+| **4** (rotate counter clockwise) | **5** (enable RGB LED) | **6** (rotate clockwise) |
+| **7** (turn left back) | **8** (drive backward) | **9** (turn right back) |
+| | | |
+
+**Side notes:**
+ - Pressing "POWER" once will lock all other buttons, pressing it again will unlock
+     - Pressing "POWER" will also terminate any already running commands
+ - Pressing "+" too many times will not cause the car greatly increase in speed
+     - Speed is capped at 255
+     - Car will not be able to drive once speed is at 100 or lower
+ - If "PLAY/PAUSE" is pressed while "CYCLE" is running, the R2D2 sound will play
+     - Buzzer sound will resume once R2D2 sound is completed
+ - Buttons may be held down while pressed to run a command continously for the driving functions
+ - For other buttons it will cause the function to switch on and off rapidly
+ - Passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
+ - Blue LED lights will flash to indicate a remote press is being registered
+ - Most universal MP3 IR remotes with 21 keys should work for the robot
+ - If more than one mode is enabled at once, the car may not drive
+     - "0" may be pressed to reset the car for commands to proceed
+ - Avoid spamming different buttons that might cause the car's commands to clash or contradict
 
 # Bill of Materials
 The 3 in 1 kit from SunFounder includes most of the parts used in this project. Parts that came with the kit will not have their price nor their link listed while parts not included in the kit will have both the price and link listed.
@@ -115,38 +845,6 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | screw driver | 1 | screwing in screws, adjusting potentiometers |  |  |
 | USB-A to USB-B cable | 1 | connect Arduino to computer |  |  |
 | USB-B to USB-C adapter | 1 | connect the cable to computer port | $6.99 | <a href="https://www.amazon.com/Syntech-Adapter-Thunderbolt-Compatible-MacBook/dp/B07CVX3516/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.d7LKMhCLqwSoIHvDHsmfNNASCcVrrSwIS4h1KNDXWaRlfv0Af9ia70iXoIl6q9XTGAAwQLY_Mqrql2JI0XznGBRShN8fWvmudbknWJjx-Cap4A_2fsLNIYGaT3qJ5T9uXpjI_nG7pi_OTwSYGeLWBtEhwgsFeNQeNk24qXI_nkghOiFOH-1DVKolZwrI3KQOInaAGnf8V-C1FKPEwEY_bQyMn8Fk7zb5oI00bNkg9fk.HC8ik8XHZQiflxFCElxXHv1JYhxPqz-lKOqaUxmfI1k&dib_tag=se&keywords=usb%2Bb%2Bto%2Busb%2Bc%2Badapter&plpRedirect=mhFallback&qid=1784572867&sr=8-3&th=1"> Link </a> |
-
-# Remote Control
-
-Below is the layout of the IR remote used for this robot. I included the names of each button based on their names in the code along with their function.
-
-| | | |
-| :--- | :---: | ---: |
-| **Power** (lock all other buttons)| **Mode** (+500Hz for buzzer) | **Mute** (-500Hz for buzzer) |
-| **Play/Pause** (play R2D2 sounds) | **Backward** (enable IR obstacle avoidance mode) | **Forward** (enable ultrasonic sensor distance detection mode) |
-| **EQ** (follow an object mode) | **Minus** (-25 speed) | **Plus** (+25 speed) |
-| **0** (stop/reset any non-numbered commands) | **Cycle** (play buzzer) | **U/SD** (self-driving mode) |
-| **1** (turn left front) | **2** (drive forward) | **3** (turn right front) |
-| **4** (rotate counter clockwise) | **5** (enable RGB LED) | **6** (rotate clockwise) |
-| **7** (turn left back) | **8** (drive backward) | **9** (turn right back) |
-| | | |
-
-**Side notes:**
- - Pressing "POWER" once will lock all other buttons, pressing it again will unlock
-     - Pressing "POWER" will also terminate any already running commands
- - Pressing "+" too many times will not cause the car greatly increase in speed
-     - Speed is capped at 255
-     - Car will not be able to drive once speed is at 100 or lower
- - If "PLAY/PAUSE" is pressed while "CYCLE" is running, the R2D2 sound will play
-     - Buzzer sound will resume once R2D2 sound is completed
- - Buttons may be held down while pressed to run a command continously for the driving functions
- - For other buttons it will cause the function to switch on and off rapidly
- - Passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
- - Blue LED lights will flash to indicate a remote press is being registered
- - Most universal MP3 IR remotes with 21 keys should work for the robot
- - If more than one mode is enabled at once, the car may not drive
-     - "0" may be pressed to reset the car for commands to proceed
- - Avoid spamming different buttons that might cause the car's commands to clash or contradict
 
 # Resources/References
 
