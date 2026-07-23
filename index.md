@@ -132,21 +132,21 @@ Below is the layout of the IR remote used for this robot. I included the names o
 | | | |
 
 **Side notes:**
- - pressing POWER once will lock all other buttons, pressing it again will unlock
-     - pressing POWER will also terminate any already running commands
- - pressing + too many times will not cause the car greatly increase in speed
-     - speed is capped at 255
-     - car will not be able to drive once speed is at 100 or lower
- - if PLAY/PAUSE is pressed while CYCLE is running, the R2D2 sound will play
-     - buzzer sound will resume once R2D2 sound is completed
- - buttons may be held down while pressed to run a command continously for the driving functions
- - for other buttons it will cause the function to switch on and off rapidly
- - passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
- - blue LED lights will flash to indicate a remote press is being registered
- - most universal MP3 IR remotes with 21 keys should work for the robot
- - if more than one mode is enabled at once, the car may not drive
-     - 0 may be pressed to reset the car for commands to proceed
- - avoid spamming different buttons that might cause the car's commands to clash or contradict
+ - Pressing "POWER" once will lock all other buttons, pressing it again will unlock
+     - Pressing "POWER" will also terminate any already running commands
+ - Pressing "+" too many times will not cause the car greatly increase in speed
+     - Speed is capped at 255
+     - Car will not be able to drive once speed is at 100 or lower
+ - If "PLAY/PAUSE" is pressed while "CYCLE" is running, the R2D2 sound will play
+     - Buzzer sound will resume once R2D2 sound is completed
+ - Buttons may be held down while pressed to run a command continously for the driving functions
+ - For other buttons it will cause the function to switch on and off rapidly
+ - Passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
+ - Blue LED lights will flash to indicate a remote press is being registered
+ - Most universal MP3 IR remotes with 21 keys should work for the robot
+ - If more than one mode is enabled at once, the car may not drive
+     - "0" may be pressed to reset the car for commands to proceed
+ - Avoid spamming different buttons that might cause the car's commands to clash or contradict
   
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
