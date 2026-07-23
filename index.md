@@ -147,6 +147,14 @@ Below is the layout of the IR remote used for this robot. I included the names o
  - If more than one mode is enabled at once, the car may not drive
      - "0" may be pressed to reset the car for commands to proceed
  - Avoid spamming different buttons that might cause the car's commands to clash or contradict
+
+# Resources/References
+
+[Sunfounder's Instructions](https://docs.sunfounder.com/projects/3in1-kit-v2/en/latest/car_project/car_assemble.html)
+[Learn About Arduino](https://docs.arduino.cc/learn/)
+[74HC959 Shift Register](https://learn.adafruit.com/74hc595)
+[RGB LED in Tinkercad](https://www.tinkercad.com/things/fMiUiPWqtO9-rgb-led)
+[L9110 Motor Driver](https://docs.sunfounder.com/projects/3in1-kit-v2/en/latest/components/component_l9110_module.html)
   
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
