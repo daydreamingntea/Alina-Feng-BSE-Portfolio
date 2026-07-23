@@ -151,9 +151,13 @@ Below is the layout of the IR remote used for this robot. I included the names o
 # Resources/References
 
 [Sunfounder's Instructions](https://docs.sunfounder.com/projects/3in1-kit-v2/en/latest/car_project/car_assemble.html)
+
 [Learn About Arduino](https://docs.arduino.cc/learn/)
+
 [74HC959 Shift Register](https://learn.adafruit.com/74hc595)
+
 [RGB LED in Tinkercad](https://www.tinkercad.com/things/fMiUiPWqtO9-rgb-led)
+
 [L9110 Motor Driver](https://docs.sunfounder.com/projects/3in1-kit-v2/en/latest/components/component_l9110_module.html)
   
 # Other Resources/Examples
