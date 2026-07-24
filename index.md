@@ -62,9 +62,6 @@ Breadboard view:
 Schematic view (not including the ground or power wiring):
 <img src="https://github.com/user-attachments/assets/d6800543-0415-4088-b0b1-d496e1540afc" style="max-width: 100%; height: auto; display: block;" />
 
-PCB view:
-<img src="https://github.com/user-attachments/assets/054297fc-252f-4239-ac55-eb5604067436" style="max-width: 100%; height: auto; display: block;" />
-
 # Code
 
 Arduino IDE (version 2.3.10) was used to run the code.
