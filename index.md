@@ -5,7 +5,7 @@ This little robot I created can be driven via remote, has several obstacle avoid
 |:--:|:--:|:--:|:--:|
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
-<img width = "3024" height = "4032" src = "Alina-F.png">
+<img src="https://github.com/daydreamingntea/Alina-Feng-BSE-Portfolio/blob/5dcb658ef62a9d7a64b4e82d1eeb0b4576997160/Alina%20F.png" style="max-width: 100%; height: auto; display: block;" />
 
 # Key Takeaways
 
