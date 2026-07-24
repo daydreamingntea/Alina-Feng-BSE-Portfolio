@@ -802,6 +802,7 @@ Below is the layout of the IR remote used for this robot. I included the names o
      - Car will not be able to drive once speed is at 100 or lower
  - If "PLAY/PAUSE" is pressed while "CYCLE" is running, the R2D2 sound will play
      - Buzzer sound will resume once R2D2 sound is completed
+     - Same logic is true for "MUTE" and "MODE"
  - Buttons may be held down while pressed to run a command continously for the driving functions
  - For other buttons it will cause the function to switch on and off rapidly
  - Passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
