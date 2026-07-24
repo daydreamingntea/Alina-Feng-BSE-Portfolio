@@ -54,7 +54,7 @@ The weevil eye uses a photoresistor (adjusts resistance inverse to the amount of
 
 # Schematics 
 
-Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself, some wires are striped to help differentiate between wires of other components along with ground and power. This schematic uses a L293D motor driver to mimic the wire placement on the L9110 motor driver since it could not find it in Fritzing.
+Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself, some wires are striped to help differentiate between wires of other components along with ground and power. Some parts could not be found in Fritzing so I used other componenets to mimic the wiring of the original part. A L293D motor driver was used to mimic the wire placement on the L9110 motor driver and a different type of passive piezo buzzer with three legs was used instead of a buzzer with only two legs.
 
 Breadboard view:
 <img src="https://github.com/user-attachments/assets/d29946c2-08b1-4d49-9d20-120fcfc3a707" alt="annoy_ppl_bb" style="max-width: 100%; height: auto; display: block;" />
