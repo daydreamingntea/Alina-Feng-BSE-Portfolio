@@ -794,6 +794,9 @@ Below is the layout of the IR remote used for this robot. I included the names o
 **Side notes:**
  - Pressing "POWER" once will lock all other buttons, pressing it again will unlock
      - Pressing "POWER" will also terminate any already running commands
+     - Check the number of times the blue LEDs light up
+     - They should only flash once
+     - If they flash more than one time then that button press was registered as two button presses
  - Pressing "+" too many times will not cause the car greatly increase in speed
      - Speed is capped at 255
      - Car will not be able to drive once speed is at 100 or lower
