@@ -5,6 +5,10 @@ This little robot I created can be driven via remote, has several obstacle avoid
 |:--:|:--:|:--:|:--:|
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
+Meet the human pestering robot, R2-B2:
+<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" style="max-width: 100%; height: auto; display: block;" />
+
+
 <img src="https://github.com/daydreamingntea/Alina-Feng-BSE-Portfolio/blob/5dcb658ef62a9d7a64b4e82d1eeb0b4576997160/Alina%20F.png" style="max-width: 100%; height: auto; display: block;" />
 
 # Key Takeaways
@@ -846,6 +850,27 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | screw driver | 1 | screwing in screws, adjusting potentiometers |  |  |
 | USB-A to USB-B cable | 1 | connect Arduino to computer |  |  |
 | USB-B to USB-C adapter | 1 | connect the cable to computer port | $6.99 | <a href="https://www.amazon.com/Syntech-Adapter-Thunderbolt-Compatible-MacBook/dp/B07CVX3516/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.d7LKMhCLqwSoIHvDHsmfNNASCcVrrSwIS4h1KNDXWaRlfv0Af9ia70iXoIl6q9XTGAAwQLY_Mqrql2JI0XznGBRShN8fWvmudbknWJjx-Cap4A_2fsLNIYGaT3qJ5T9uXpjI_nG7pi_OTwSYGeLWBtEhwgsFeNQeNk24qXI_nkghOiFOH-1DVKolZwrI3KQOInaAGnf8V-C1FKPEwEY_bQyMn8Fk7zb5oI00bNkg9fk.HC8ik8XHZQiflxFCElxXHv1JYhxPqz-lKOqaUxmfI1k&dib_tag=se&keywords=usb%2Bb%2Bto%2Busb%2Bc%2Badapter&plpRedirect=mhFallback&qid=1784572867&sr=8-3&th=1"> Link </a> |
+
+# Photos
+
+Front view:
+<img style="max-width: 100%; height: auto; display: block;" alt="frontview" src="https://github.com/user-attachments/assets/d54147e5-c83b-4941-aac7-768f27efae3e" />
+
+Back view:
+<img style="max-width: 100%; height: auto; display: block;" alt="backview" src="https://github.com/user-attachments/assets/04191478-b559-42ec-8c97-7011e0995037" />
+
+Side view (right):
+<img style="max-width: 100%; height: auto; display: block;" alt="sideview(right)" src="https://github.com/user-attachments/assets/fc8efb9c-39f2-4ea6-9b72-6ead4d7709d2" />
+
+Side view (left):
+<img style="max-width: 100%; height: auto; display: block;" alt="sideview" src="https://github.com/user-attachments/assets/2a86a4fb-c0f0-41ac-8e8a-4ee6b67ca78f" />
+
+Top view:
+<img style="max-width: 100%; height: auto; display: block;" alt="birdseyeview(top)" src="https://github.com/user-attachments/assets/f2a96d02-479f-430e-bf74-bf490374adfb" />
+
+Bottom view:
+<img style="max-width: 100%; height: auto; display: block;" alt="bottomview" src="https://github.com/user-attachments/assets/c9fb5a79-46c4-43b7-9f01-ad0d0947474a" />
+
 
 # Resources/References
 
