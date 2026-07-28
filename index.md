@@ -1,5 +1,5 @@
 # Human Pestering Robot
-This little robot I created can be driven via remote, has several obstacle avoidance systems, can follow objects, play a sound, and light up. Majority of these functions were added to make the robot appear approachable and enable it to midly annoy others. Ironically, I ran into many annoyances while designing and testing this robot.
+This little robot I created can be driven via remote, has several obstacle avoidance systems, can follow objects, play a sound, and light up. Majority of these functions were added to make the robot appear approachable and enable it to midly irritate others. Ironically, I ran into many annoyances while designing and testing this robot.
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
