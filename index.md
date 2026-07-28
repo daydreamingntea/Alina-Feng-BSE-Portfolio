@@ -9,7 +9,7 @@ Meet the human pestering robot, R2-B2:
 <img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" style="max-width: 100%; height: auto; display: block;" />
 
 
-![Headstone Image](AlinaF.png)
+![Headstone Image](logo.svg)
 
 
 # Key Takeaways
