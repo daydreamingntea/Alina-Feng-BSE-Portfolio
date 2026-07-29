@@ -6,10 +6,11 @@ This little robot I created can be driven via remote, has several obstacle avoid
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
 Meet the human pestering robot, R2-B2:
-<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" style="max-width: 100%; height: auto; display: block;" />
+
+<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "400" height = "450" />
 
 
-![Headstone Image](asdfasdfasdf.jpeg)
+<img src="asdfasdfasdf.jpeg" alt="headshot_image" width = "400" height = "530" />
 
 
 # Key Takeaways
@@ -855,22 +856,28 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 # Photos
 
 Front view:
-<img style="max-width: 100%; height: auto; display: block;" alt="frontview" src="https://github.com/user-attachments/assets/d54147e5-c83b-4941-aac7-768f27efae3e" />
+
+<img width="550" heigh ="450" alt="frontview" src="https://github.com/user-attachments/assets/d54147e5-c83b-4941-aac7-768f27efae3e" />
 
 Back view:
-<img style="max-width: 100%; height: auto; display: block;" alt="backview" src="https://github.com/user-attachments/assets/04191478-b559-42ec-8c97-7011e0995037" />
+
+<img width="550" height="450"  alt="backview" src="https://github.com/user-attachments/assets/04191478-b559-42ec-8c97-7011e0995037" />
 
 Side view (right):
-<img style="max-width: 100%; height: auto; display: block;" alt="sideview(right)" src="https://github.com/user-attachments/assets/fc8efb9c-39f2-4ea6-9b72-6ead4d7709d2" />
+
+<img width="550" height="450" alt="sideview(right)" src="https://github.com/user-attachments/assets/fc8efb9c-39f2-4ea6-9b72-6ead4d7709d2" />
 
 Side view (left):
-<img style="max-width: 100%; height: auto; display: block;" alt="sideview" src="https://github.com/user-attachments/assets/2a86a4fb-c0f0-41ac-8e8a-4ee6b67ca78f" />
+
+<img width="550" height="450" alt="sideview" src="https://github.com/user-attachments/assets/2a86a4fb-c0f0-41ac-8e8a-4ee6b67ca78f" />
 
 Top view:
-<img style="max-width: 100%; height: auto; display: block;" alt="birdseyeview(top)" src="https://github.com/user-attachments/assets/f2a96d02-479f-430e-bf74-bf490374adfb" />
+
+<img width="550" height ="450" alt="birdseyeview(top)" src="https://github.com/user-attachments/assets/f2a96d02-479f-430e-bf74-bf490374adfb" />
 
 Bottom view:
-<img style="max-width: 100%; height: auto; display: block;" alt="bottomview" src="https://github.com/user-attachments/assets/c9fb5a79-46c4-43b7-9f01-ad0d0947474a" />
+
+<img width="400" height ="500" alt="bottomview" src="https://github.com/user-attachments/assets/c9fb5a79-46c4-43b7-9f01-ad0d0947474a" />
 
 
 # Resources/References
