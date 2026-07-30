@@ -96,10 +96,13 @@ The weevil eye uses a photoresistor (adjusts resistance inverse to the amount of
 Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself or on the different views of the circuit. Some wires are striped to help differentiate between wires of other components along with ground and power. Some parts could not be found in Fritzing so I used other componenets to mimic the wiring of the original part. A L293D motor driver was used to mimic the wire placement on the L9110 motor driver and a different type of passive piezo buzzer with three legs was used instead of a buzzer with only two legs.
 
 Breadboard view:
-<img src="https://github.com/user-attachments/assets/01547e19-5cab-4ada-ad4e-c77a708bf039" style="max-width: 100%; height: auto; display: block;" />
+<img alt="breadboard_view" src="https://github.com/user-attachments/assets/01547e19-5cab-4ada-ad4e-c77a708bf039" style="max-width: 100%; height: auto; display: block;" />
 
 Schematic view (not including the ground or power wiring):
-<img src="https://github.com/user-attachments/assets/d6800543-0415-4088-b0b1-d496e1540afc" style="max-width: 100%; height: auto; display: block;" />
+<img alt="schematic_view" src="https://github.com/user-attachments/assets/d6800543-0415-4088-b0b1-d496e1540afc" style="max-width: 100%; height: auto; display: block;" />
+
+Tinkercad image of shell (front view):
+<img alt="R2-P2 Shell" src="https://github.com/user-attachments/assets/a6b41b4e-48e5-4777-9e77-98486a4f0d1a" style="max-width: 100%; height: auto; display: block;" />
 
 
 
@@ -893,7 +896,7 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 
 Front view:
 
-<img width="550" heigh ="450" alt="frontview" src="https://github.com/user-attachments/assets/d54147e5-c83b-4941-aac7-768f27efae3e" />
+<img width="550" height ="450" alt="frontview" src="https://github.com/user-attachments/assets/d54147e5-c83b-4941-aac7-768f27efae3e" />
 
 Back view:
 
@@ -909,7 +912,7 @@ Side view (left):
 
 Top view:
 
-<img width="550" height ="450" alt="birdseyeview(top)" src="https://github.com/user-attachments/assets/f2a96d02-479f-430e-bf74-bf490374adfb" />
+<img width="550" height ="450" alt="topview" src="https://github.com/user-attachments/assets/f2a96d02-479f-430e-bf74-bf490374adfb" />
 
 Bottom view:
 
@@ -935,6 +938,8 @@ Bottom view:
 [IR Obstacle Avoidance Module](https://docs.sunfounder.com/projects/ultimate-sensor-kit/en/latest/components_basic/09-component_ir_obstacle.html)
 
 [IR Receiver](https://www.electronicsforu.com/technology-trends/learn-electronics/ir-led-infrared-sensor-basics)
+
+[R2-P2 Shell in Tinkercad](https://www.tinkercad.com/things/4CaNTyB6qjf-r2-p2-shell?sharecode=zzgwlA6xi9fULf1pJyHvQjDoMSWYv4az1VmkAlHU0ek)
 
 [Project Notebook](https://docs.google.com/document/d/1CKAgA1Z3KnM4e_xub-k0-8ildSCVjZ5tO_CuyvIDajk/edit?tab=t.0)
 
