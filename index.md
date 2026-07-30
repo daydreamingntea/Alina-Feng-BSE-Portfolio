@@ -855,6 +855,7 @@ Below is the layout of the IR remote used for this robot. I included the names o
  - Most universal MP3 IR remotes with 21 keys should work for the robot
  - If more than one mode is enabled at once, the car may not drive
      - "0" may be pressed to reset the car for commands to proceed
+ - Aim the remote at the receiver, otherwise the robot may not get a signal
  - Avoid spamming different buttons that might cause the car's commands to clash or contradict
 
 # Bill of Materials
