@@ -899,25 +899,50 @@ Front view:
 
 <img width="550" height ="450" alt="frontview" src="https://github.com/user-attachments/assets/d54147e5-c83b-4941-aac7-768f27efae3e" />
 
+
 Back view:
 
 <img width="550" height="450"  alt="backview" src="https://github.com/user-attachments/assets/04191478-b559-42ec-8c97-7011e0995037" />
+
 
 Side view (right):
 
 <img width="550" height="450" alt="sideview(right)" src="https://github.com/user-attachments/assets/fc8efb9c-39f2-4ea6-9b72-6ead4d7709d2" />
 
+
 Side view (left):
 
 <img width="550" height="450" alt="sideview" src="https://github.com/user-attachments/assets/2a86a4fb-c0f0-41ac-8e8a-4ee6b67ca78f" />
+
 
 Top view:
 
 <img width="550" height ="450" alt="topview" src="https://github.com/user-attachments/assets/f2a96d02-479f-430e-bf74-bf490374adfb" />
 
+
 Bottom view:
 
 <img width="400" height ="500" alt="bottomview" src="https://github.com/user-attachments/assets/c9fb5a79-46c4-43b7-9f01-ad0d0947474a" />
+
+
+Front view with shell:
+
+<img width="550" height="450" alt="shellfront" src="https://github.com/user-attachments/assets/61a57389-7250-4e99-a4f4-ca6a3b4d570f" />
+
+
+Side view with shell (right):
+
+<img width="550" height="450" alt="shellright" src="https://github.com/user-attachments/assets/4157df79-4c5c-4e41-b251-cc3f921e1bb3" />
+
+
+Side view with shell (left):
+
+<img width="550" height="450" alt="shellleft" src="https://github.com/user-attachments/assets/9c5f01d8-df82-4d7a-9452-b605b1b9f745" />
+
+
+Top view with shell:
+
+<img width="400" height="500" alt="shelltop" src="https://github.com/user-attachments/assets/31d5d747-e395-4367-ad70-bae47e776564" />
 
 
 # Resources/References
