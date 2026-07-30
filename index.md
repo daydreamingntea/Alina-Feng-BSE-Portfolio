@@ -5,7 +5,7 @@ This little robot I created can be driven via remote, has several obstacle avoid
 |:--:|:--:|:--:|:--:|
 | Alina F | Lynbrook High School | Still Exploring | Rising Sophomore
 
-Meet the human pestering robot, R2-B2:
+Meet the human pestering robot, R2-P2:
 
 <img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "400" height = "450" />
 
@@ -17,6 +17,18 @@ Meet the human pestering robot, R2-B2:
 
 During my time at BlueStamp, I expanded on my existing knowledge of the Arduino and circuit design. I had worked with sensors and components that I wasn't familar with. On top of that, I had to code in order for everything to work. Learning to code is something that I always despised and I certainly did not want to learn how to code just for this project. I ended up using Claude to write out the base code (since I am not familar with the format of coding) before making changes myself. Everytime a problem arose, my first instinct is to isolate certain variables and narrow down the issue (this method has served me well in this project). As for other skills I gained, I also learned to create schematics in Tinkercad and Fritzing (plus figuring out how to download Fritzing from Github). For the future, I hope to expand my knowledge of circuit components and familiarize myself with the art of problem solving.  
   
+# Fourth Milestone
+
+## Progress
+
+Two main changes were made in this milestone: a locking mechanism and a new sound can be produced. When the "pause/play" button is pressed, the car will play an R2-D2 inspired noise that consists of a series of chirps followed by a sad descending groan. This sound is produced by the passive piezo buzzer (it also holds priority over the piezo buzzer sound produced when "cycle" is pressed). The locking mechanism can be initiated by pressing the "power" button once. This will cause the car to ignore any commands or button pressed (will also terminate any previously running commands) until it is pressed again. I also hot glued the solder joints for both IR obstacle avoidance modules to reduce the risk of the LEDs breaking off. 
+
+## Challenges
+
+The "power" button is incredibly sensitive, so the user must be very careful when pressing the button as once button press may register as two presses. Monitoring the number of times the two blue LEDs flash will help with determining how many button pressed the car has registered. 
+
+Since the tone() function occupies Timer2, but the IR remote also uses Timer2, sequence of sounds for R2-D2 function must be written out manually. The sequence is built one event at a time while an update is called every loop. This allows the R2-D2 sounds to play even while the car is driving (same logic that was used for the passive piezo buzzer). I also added a section in the code so that when R2-D2 sound plays, it will interrupt the normal piezo buzzer sound (if it was playing) until the sequence is completed. 
+
 # Third Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZbtA5DcNpWU?si=88WjiowESC8bPYQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -24,7 +36,7 @@ During my time at BlueStamp, I expanded on my existing knowledge of the Arduino 
 
 ## Progress
 
-In this third milestone, I added back the sensors that were previously removed (IR obstacle avoidance, HC-SR04 ultrasonic sensor, line tracking). I was debating about removing the line tracking module since it would open up more digital pins that I could use for other components (LEDs and piezo buzzer). I spent some time playing around with the layout of the LEDs before deciding I wanted to add two RGB LEDs. At first, I had them connected to the analog pins and gave them a code so that they will continously change color once turned on. The code has each hue choose randomly between 0 and 255. Occasionally, all the values land on 255 which results in the LED appearing off. I was considering altering the code so this doesn't happen, but decided against it since I was already satisfied with how it worked. Two white LEDs were added to function as the car's turn signals. When a button for the car to turn is pressed, the corresponding LED will be set to true and the other will be false. 
+In this third milestone, I added back the sensors that were previously removed (IR obstacle avoidance, HC-SR04 ultrasonic sensor, line tracking). I was debating about removing the line tracking module since it would open up more digital pins that I could use for other components (LEDs and piezo buzzer). I spent some time playing around with the layout of the LEDs before deciding I wanted to add two RGB LEDs. At first, I had them connected to the analog pins and gave them a code so that they will continuously change color once turned on. The code has each hue choose randomly between 0 and 255. Occasionally, all the values land on 255 which results in the LED appearing off. I was considering altering the code so this doesn't happen, but decided against it since I was already satisfied with how it worked. Two white LEDs were added to function as the car's turn signals. When a button for the car to turn is pressed, the corresponding LED will be set to true and the other will be false. 
 
 ## Challenges
 
@@ -819,6 +831,7 @@ Below is the layout of the IR remote used for this robot. I included the names o
 **Side notes:**
  - Pressing "POWER" once will lock all other buttons, pressing it again will unlock
      - Pressing "POWER" will also terminate any already running commands
+     - This button is very sensitive
      - Check the number of times the blue LEDs light up
      - They should only flash once
      - If they flash more than one time then that button press was registered as two button presses
@@ -828,7 +841,7 @@ Below is the layout of the IR remote used for this robot. I included the names o
  - If "PLAY/PAUSE" is pressed while "CYCLE" is running, the R2D2 sound will play
      - Buzzer sound will resume once R2D2 sound is completed
      - Same logic is true for "MUTE" and "MODE"
- - Buttons may be held down while pressed to run a command continously for the driving functions
+ - Buttons may be held down while pressed to run a command continuously for the driving functions
  - For other buttons it will cause the function to switch on and off rapidly
  - Passive piezo buzzer's frequency is limited to between 100Hz and 10000Hz
  - Blue LED lights will flash to indicate a remote press is being registered
@@ -924,6 +937,7 @@ Bottom view:
 # Considerations
 
 This section is dedicated to methods of protecting and preserving the robot as there may be people who will tamper or even attempt to destroy it. 
+
 *Please note that this section is mainly satire, thank you.*
 
 **What if someone seeks to destroy the robot?**
@@ -937,8 +951,12 @@ This section is dedicated to methods of protecting and preserving the robot as t
 - Confiscate the battery
 - Blackmail
 
-**What if someone tries to hijack the robot with the remote?**
+**What if someone tries to hijack the robot with another remote?**
 - Start a monopoly for the remotes
 - Take away their remote
 - Blackmail
+
+**Who is better, R2-D2 or R2-P2?**
+- Both are amazing
+- I love them both
 
