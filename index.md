@@ -23,6 +23,8 @@ During my time at BlueStamp, I expanded on my existing knowledge of the Arduino 
 
 Two main changes were made in this milestone: a locking mechanism and a new sound can be produced. When the "pause/play" button is pressed, the car will play an R2-D2 inspired noise that consists of a series of chirps followed by a sad descending groan. This sound is produced by the passive piezo buzzer (it also holds priority over the piezo buzzer sound produced when "cycle" is pressed). The locking mechanism can be initiated by pressing the "power" button once. This will cause the car to ignore any commands or button pressed (will also terminate any previously running commands) until it is pressed again. I also hot glued the solder joints for both IR obstacle avoidance modules to reduce the risk of the LEDs breaking off. 
 
+A shell for the robot was CADed (see the schematics section for the diagram or resources/references for the link). This case will cover most of the wires that connect to the mini breadboard and Arduino while leaving a large portion of the half-sized breadboard exposed. The shell also has a cupholder and a slot for items such as the remote or an iPhone. I was planning to fasten the shell using screws so that it is secure, but also removable. Sadly, I did not receive the 3D print at this moment.
+
 ## Challenges
 
 The "power" button is incredibly sensitive, so the user must be very careful when pressing the button as once button press may register as two presses. Monitoring the number of times the two blue LEDs flash will help with determining how many button pressed the car has registered. 
@@ -98,6 +100,8 @@ Breadboard view:
 
 Schematic view (not including the ground or power wiring):
 <img src="https://github.com/user-attachments/assets/d6800543-0415-4088-b0b1-d496e1540afc" style="max-width: 100%; height: auto; display: block;" />
+
+
 
 # Code
 
@@ -945,18 +949,24 @@ This section is dedicated to methods of protecting and preserving the robot as t
 - Make sure that they do NOT tamper with the wiring
 - Blackmail
 
+
 **What if someone starts spamming the buttons?**
 - Use the locking mechanism with the power button
 - Hide the remote or the robot
 - Confiscate the battery
+- Change the code so the robot does nothing
 - Blackmail
+
 
 **What if someone tries to hijack the robot with another remote?**
 - Start a monopoly for the remotes
 - Take away their remote
+- Change the code so the remote does nothing out of pure pettiness
 - Blackmail
+
 
 **Who is better, R2-D2 or R2-P2?**
 - Both are amazing
 - I love them both
+- They have their strengths and weaknesses
 
