@@ -10,7 +10,7 @@ Meet the human pestering robot, R2-P2:
 <img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "400" height = "450" />
 
 
-<img src="asdfasdfasdf.jpeg" alt="headshot_image" width = "400" height = "530" />
+<img src="AlinaF_R2-P2.jpeg" alt="headshot_image" width = "400" height = "530" />
 
 
 # Key Takeaways
