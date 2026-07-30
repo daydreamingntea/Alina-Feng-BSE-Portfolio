@@ -21,6 +21,8 @@ During my time at BlueStamp, I expanded on my existing knowledge of the Arduino 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZbtA5DcNpWU?si=88WjiowESC8bPYQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+## Progress
+
 In this third milestone, I added back the sensors that were previously removed (IR obstacle avoidance, HC-SR04 ultrasonic sensor, line tracking). I was debating about removing the line tracking module since it would open up more digital pins that I could use for other components (LEDs and piezo buzzer). I spent some time playing around with the layout of the LEDs before deciding I wanted to add two RGB LEDs. At first, I had them connected to the analog pins and gave them a code so that they will continously change color once turned on. The code has each hue choose randomly between 0 and 255. Occasionally, all the values land on 255 which results in the LED appearing off. I was considering altering the code so this doesn't happen, but decided against it since I was already satisfied with how it worked. Two white LEDs were added to function as the car's turn signals. When a button for the car to turn is pressed, the corresponding LED will be set to true and the other will be false. 
 
 ## Challenges
@@ -37,6 +39,8 @@ Unfortunately, the Arduino did not have enough digital pins for the next two com
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7uoHsh0dZ4o?si=JFxf60nT4T1G4ZaD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+## Progress
+
 In this milestone, the mini breadboard was removed in favor of using a half-sized breadboard to give myself more room for any components I may add in the future. I used velcro to attach the half-sized breadboard for easy relocation. Majority of the sensors and modules have been removed as I did not plan on using them (obstacle avoidance module, ultrasonic sensor, and line tracking module). As of right now, the only component on the breadboard is a 38kHz IR receiver. The receiver is able to detect IR signals from the remote and converts that into electrical commands. Receivers use photodiodes to absorb light along with a filter to ensure that only IR waves may pass through. For the wiring, one leg is wired to GND, another is wired to the 5V pin on the Arduino, and the last is wired to digital pin 12. The VCC pin from the motor controller is connected to the VCC leg on the receiver (and also the 5V pin). 
   
 The code requires installation of the IRremote library. When a button is pressed on the remote, the receiver will detect which button is pressed and carry out the corresponding action. Movement functions set the four motor pins using PWM, with pin combinations that determine the wheels' direction of rotation, enabling the car to move foward, backward, left, right, and spin in place. A decoding function is used to convert the receiver's signals so it is easily readable and ignores any unrecongnized signals. 
@@ -50,6 +54,8 @@ While testing the remote, I noticed that the robot had a tendency to drift right
 # First Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BZBUk8scZYY?si=7nvxbyhpaTeg-iDW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Progress
 
 The robot uses an acrylic plate as a base where the other parts will reside. On the top, an Arduino Uno is fastened using standoffs and screws, this will read inputs and translate them into outputs. A mini breadboard is attached anterior of the Arduino. The breadboard will be used to prototype, build, and test any circuits I plan on creating in the future. As of now, an ultrasonic sensor is attached to its front end and may be used to measure distance via echolocation (this can be used to automate the robot). Similarly, the two IR observance modules (these are screwed onto the left and right anterior ends of the acrylic plate on the topside) can function as proximity sensors by utilizing IR light. A line track module screwed to the bottom front side of the acrylic plate enables the car to navigate along a designated line. 
   
