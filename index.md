@@ -920,3 +920,25 @@ Bottom view:
 [IR Receiver](https://www.electronicsforu.com/technology-trends/learn-electronics/ir-led-infrared-sensor-basics)
 
 [Project Notebook](https://docs.google.com/document/d/1CKAgA1Z3KnM4e_xub-k0-8ildSCVjZ5tO_CuyvIDajk/edit?tab=t.0)
+
+# Considerations
+
+This section is dedicated to methods of protecting and preserving the robot as there may be people who will tamper or even attempt to destroy it. 
+*Please note that this section is mainly satire, thank you.*
+
+**What if someone seeks to destroy the robot?**
+- Hide it away from them
+- Make sure that they do NOT tamper with the wiring
+- Blackmail
+
+**What if someone starts spamming the buttons?**
+- Use the locking mechanism with the power button
+- Hide the remote or the robot
+- Confiscate the battery
+- Blackmail
+
+**What if someone tries to hijack the robot with the remote?**
+- Start a monopoly for the remotes
+- Take away their remote
+- Blackmail
+
