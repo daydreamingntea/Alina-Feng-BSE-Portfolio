@@ -19,6 +19,9 @@ During my time at BlueStamp, I expanded on my existing knowledge of the Arduino 
   
 # Fourth Milestone
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TwJWzN4bGt8?si=diHoslE3ReBSugDq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
 ## Progress
 
 Two main changes were made in this milestone: a locking mechanism and a new sound can be produced. When the "pause/play" button is pressed, the car will play an R2-D2 inspired noise that consists of a series of chirps followed by a sad descending groan. This sound is produced by the passive piezo buzzer (it also holds priority over the piezo buzzer sound produced when "cycle" is pressed). The locking mechanism can be initiated by pressing the "power" button once. This will cause the car to ignore any commands or button pressed (will also terminate any previously running commands) until it is pressed again. I also hot glued the solder joints for both IR obstacle avoidance modules to reduce the risk of the LEDs breaking off. 
