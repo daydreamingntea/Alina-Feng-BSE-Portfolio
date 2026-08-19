@@ -15,7 +15,7 @@ Meet the human pestering robot, R2-P2:
 
 # Key Takeaways
 
-During my time at BlueStamp, I expanded on my existing knowledge of the Arduino and circuit design. I had worked with sensors and components that I wasn't familar with. On top of that, I had to code in order for everything to work. Learning to code is something that I always despised and I certainly did not want to learn how to code just for this project. I ended up using Claude to write out the base code (since I am not familar with the format of coding) before making changes myself. Everytime a problem arose, my first instinct is to isolate certain variables and narrow down the issue (this method has served me well in this project). As for other skills I gained, I also learned to create schematics in Tinkercad and Fritzing (plus figuring out how to download Fritzing from Github). For the future, I hope to expand my knowledge of circuit components and familiarize myself with the art of problem solving.  
+During my time at BlueStamp, I expanded on my existing knowledge of the Arduino and circuit design. I had worked with sensors and components that I wasn't familiar with. On top of that, I had to code in order for everything to work. Learning to code is something that I always despised and I certainly did not want to learn how to code just for this project. I ended up using Claude to write out the base code (since I am not familiar with the format of coding) before making changes myself. Every time a problem arose, my first instinct is to isolate certain variables and narrow down the issue (this method has served me well in this project). As for other skills I gained, I also learned to create schematics in Tinkercad and Fritzing (plus figuring out how to download Fritzing from Github). For the future, I hope to expand my knowledge of circuit components and familiarize myself with the art of problem solving.  
   
 # Fourth Milestone
 
@@ -33,6 +33,8 @@ A shell for the robot was CADed (see the schematics section for the diagram or r
 The "power" button is incredibly sensitive, so the user must be very careful when pressing the button as once button press may register as two presses. Monitoring the number of times the two blue LEDs flash will help with determining how many button pressed the car has registered. 
 
 Since the tone() function occupies Timer2, but the IR remote also uses Timer2, sequence of sounds for R2-D2 function must be written out manually. The sequence is built one event at a time while an update is called every loop. This allows the R2-D2 sounds to play even while the car is driving (same logic that was used for the passive piezo buzzer). I also added a section in the code so that when R2-D2 sound plays, it will interrupt the normal piezo buzzer sound (if it was playing) until the sequence is completed. 
+
+*Note: for post BlueStamp modifications, see section titled "Post BlueStamp Progress" below starter project.*
 
 # Third Milestone
 
@@ -93,10 +95,15 @@ As for why I chose this project, I wanted to expand on my Arduino knowledge and 
 
 The weevil eye uses a photoresistor (adjusts resistance inverse to the amount of light), a transistor, three resistors, and two LEDs. When less light is detected by the photoresistor, its resistance spikes and forces more current into the transistor. Once a threshold is met, power may flow and turn on the LEDs. A battery holder is present on the bottom of the weevil eye. 
 
+# Post BlueStamp Modifications and Status
+
+I decided to swap out the 1:48 TT motors for more powerful 1:90 motors so that they robot may drive faster. While screwing the new motors, I had to be extra careful not to disrupt the wiring (this was actually way harder than I thought it would be). When it came to testing the new motors, the robot would not drive. This is most likely the result of the motors drawing in too much current and the 9V battery not being enough to power the robot. To fix this, a separate battery will be given to power the motors and the motor controller. 
+
+The robot's shell is also rubbing against one of the wheels, which hinders the wheel from turning. A new shell will be 3D printed. I also replaced some of the jumper wires to help color code components on the robot.
 
 # Schematics 
 
-Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself or on the different views of the circuit. Some wires are striped to help differentiate between wires of other components along with ground and power. Some parts could not be found in Fritzing so I used other componenets to mimic the wiring of the original part. A L293D motor driver was used to mimic the wire placement on the L9110 motor driver and a different type of passive piezo buzzer with three legs was used instead of a buzzer with only two legs.
+Note: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself or on the different views of the circuit. Some wires are striped to help differentiate between wires of other components along with ground and power. Some parts could not be found in Fritzing so I used other components to mimic the wiring of the original part. A L293D motor driver was used to mimic the wire placement on the L9110 motor driver and a different type of passive piezo buzzer with three legs was used instead of a buzzer with only two legs.
 
 Breadboard view:
 <img alt="breadboard_view" src="https://github.com/user-attachments/assets/01547e19-5cab-4ada-ad4e-c77a708bf039" style="max-width: 100%; height: auto; display: block;" />
@@ -895,6 +902,7 @@ The 3 in 1 kit from SunFounder includes most of the parts used in this project. 
 | screw driver | 1 | screwing in screws, adjusting potentiometers |  |  |
 | USB-A to USB-B cable | 1 | connect Arduino to computer |  |  |
 | USB-B to USB-C adapter | 1 | connect the cable to computer port | $6.99 | <a href="https://www.amazon.com/Syntech-Adapter-Thunderbolt-Compatible-MacBook/dp/B07CVX3516/ref=sr_1_3?channelId=500&clpRedir=Y&dib=eyJ2IjoiMSJ9.d7LKMhCLqwSoIHvDHsmfNNASCcVrrSwIS4h1KNDXWaRlfv0Af9ia70iXoIl6q9XTGAAwQLY_Mqrql2JI0XznGBRShN8fWvmudbknWJjx-Cap4A_2fsLNIYGaT3qJ5T9uXpjI_nG7pi_OTwSYGeLWBtEhwgsFeNQeNk24qXI_nkghOiFOH-1DVKolZwrI3KQOInaAGnf8V-C1FKPEwEY_bQyMn8Fk7zb5oI00bNkg9fk.HC8ik8XHZQiflxFCElxXHv1JYhxPqz-lKOqaUxmfI1k&dib_tag=se&keywords=usb%2Bb%2Bto%2Busb%2Bc%2Badapter&plpRedirect=mhFallback&qid=1784572867&sr=8-3&th=1"> Link </a> |
+| 1:90 DC motors | 4 | replace 1:48 motors so robot may drive faster | $ 9.99 | <a href="https://www.amazon.com/4Pcs-Metal-Motor-3V-6V-Ratio/dp/B099MX2J5B/ref=sr_1_2?crid=1GOWBP9ZKJH5A&dib=eyJ2IjoiMSJ9.XDL2-kUlQia91HxPG8aX_VSp2HAxttzQZcLmCtNf-GKbiF-c0fxlttibKuc_ZQIAKAhp0TrEcIcVJ4crREJXU7vS3wPWiUhmsqoCcuzhWnYLWP-HsXL2B0hhKacR0JXPsD1_ADfEyz9g1rzZZy_8liqPMbZ7BkhJejsGUmcM1ddm9kBUaVm7iqZRF0pZA77GTSkTRQY3mhNgdweo1EyIgrrF46QUVHdlatZ9yz5Yc_gkQYWMnKKJI2vXTnzm88bj73H9L5hpGZjAMJ26_gCXVT93k5H3IFVvBUBy-w96uec.qHdcNuLFFT2ajAbGxy0wWCuBgDX0MbfPIRhX_yNLxWc&dib_tag=se&keywords=1%3A90%2Btt%2Bmotors&qid=1787168478&sprefix=1%2B90%2Btt%2Bmotor%2Caps%2C185&sr=8-2&th=1"> Link </a> |
 
 # Photos
 
