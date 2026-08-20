@@ -14,7 +14,7 @@ layout: default
     position: sticky;
     top: 20px;
     align-self: flex-start;
-    width: 180px;
+    width: 200px;
     flex-shrink: 0;
     background: #f6f8fa;
     border: 1px solid #e1e4e8;
