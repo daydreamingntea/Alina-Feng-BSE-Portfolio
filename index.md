@@ -12,6 +12,38 @@ Meet the human pestering robot, R2-P2:
 
 <img src="asdfasdfasdf.jpeg" alt="headshot_image" width = "400" height = "530" />
 
+# Anchor Links
+
+1. [Introduction](#human-pestering-robot)
+
+2. [Key Takeaways](#key-takeaways)
+
+3. [Fourth Milestone](#fourth-milestone)
+
+4. [Third Milestone](#third-milestone)
+
+5. [Second Milestone](#second-milestone)
+
+6. [First Milestone](#first-milestone)
+
+7. [Starter Project](#starter-project)
+
+8. [Post BlueStamp Modifications and Status](#post-bluestamp-modifications-and-status)
+
+9. [Schematics](#schematics)
+
+10. [Code](#code)
+
+11. [Remote Control](#remote-control)
+
+12. [Bill of Materials](#bill-of-materials)
+
+13. [Photos](#photos)
+
+14. [Resources/References](#resourcesreferences)
+
+15. [Considerations](#considerations)
+
 
 # Key Takeaways
 
