@@ -115,7 +115,7 @@ This little robot I created can be driven via remote, has several obstacle avoid
 
 Meet the human pestering robot, R2-P2:
 
-<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "490" height = "530" />
+<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "400" height = "430" />
 
 <img src="asdfasdfasdf.jpeg" alt="headshot_image" width = "400" height = "530" />
 
