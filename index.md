@@ -1,3 +1,111 @@
+---
+layout: default
+---
+
+<style>
+  /* Layout: sidebar + content side by side */
+  .page-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .toc-sidebar {
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    width: 220px;
+    flex-shrink: 0;
+    background: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 1rem;
+    font-size: 0.9rem;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+  }
+
+  .toc-sidebar h4 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #159957;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.5rem;
+  }
+
+  .toc-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-sidebar li {
+    margin-bottom: 0.4rem;
+  }
+
+  .toc-sidebar a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .toc-sidebar a:hover {
+    background: #eaf7ef;
+    color: #159957;
+  }
+
+  .toc-sidebar a.active {
+    background: #159957;
+    color: #fff;
+  }
+
+  .main-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Stack on small screens */
+  @media (max-width: 800px) {
+    .page-content {
+      flex-direction: column;
+    }
+    .toc-sidebar {
+      position: static;
+      width: 100%;
+      max-height: none;
+    }
+  }
+</style>
+
+<div class="page-content">
+
+<nav class="toc-sidebar" id="toc">
+  <h4>Contents</h4>
+  <ul>
+    <li><a href="#human-pestering-robot">Human Pestering Robot</a></li>
+    <li><a href="#key-takeaways">Key Takeaways</a></li>
+    <li><a href="#fourth-milestone">Fourth Milestone</a></li>
+    <li><a href="#third-milestone">Third Milestone</a></li>
+    <li><a href="#second-milestone">Second Milestone</a></li>
+    <li><a href="#first-milestone">First Milestone</a></li>
+    <li><a href="#starter-project">Starter Project</a></li>
+    <li><a href="#post-bluestamp-modifications-and-status">Post BlueStamp Modifications and Status</a></li>
+    <li><a href="#schematics">Schematics</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#remote-control">Remote Control</a></li>
+    <li><a href="#bill-of-materials">Bill of Materials</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#resourcesreferences">Resources/References</a></li>
+    <li><a href="#considerations">Considerations</a></li>
+  </ul>
+</nav>
+
+<div class="main-body" markdown="1">
+
 # Human Pestering Robot
 This little robot I created can be driven via remote, has several obstacle avoidance systems, can follow objects, play a sound, and light up. Majority of these functions were added to make the robot appear approachable and enable it to midly irritate others. Ironically, I ran into many annoyances while designing and testing this robot.
 
@@ -7,42 +115,9 @@ This little robot I created can be driven via remote, has several obstacle avoid
 
 Meet the human pestering robot, R2-P2:
 
-<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "400" height = "450" />
-
+<img src="https://github.com/user-attachments/assets/8a1df135-063e-4a11-a8ec-81912b459c17" alt="human_pestering_robot" width = "490" height = "530" />
 
 <img src="asdfasdfasdf.jpeg" alt="headshot_image" width = "400" height = "530" />
-
-# Anchor Links
-
-1. [Introduction](#human-pestering-robot)
-
-2. [Key Takeaways](#key-takeaways)
-
-3. [Fourth Milestone](#fourth-milestone)
-
-4. [Third Milestone](#third-milestone)
-
-5. [Second Milestone](#second-milestone)
-
-6. [First Milestone](#first-milestone)
-
-7. [Starter Project](#starter-project)
-
-8. [Post BlueStamp Modifications and Status](#post-bluestamp-modifications-and-status)
-
-9. [Schematics](#schematics)
-
-10. [Code](#code)
-
-11. [Remote Control](#remote-control)
-
-12. [Bill of Materials](#bill-of-materials)
-
-13. [Photos](#photos)
-
-14. [Resources/References](#resourcesreferences)
-
-15. [Considerations](#considerations)
 
 
 # Key Takeaways
@@ -1044,3 +1119,30 @@ This section is dedicated to methods of protecting and preserving the robot as t
 - I love them both
 - They have their strengths and weaknesses
 
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const links = document.querySelectorAll(".toc-sidebar a");
+  const sections = Array.from(links).map(link =>
+    document.querySelector(link.getAttribute("href"))
+  ).filter(Boolean);
+
+  function onScroll() {
+    let currentId = "";
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 100) {
+        currentId = "#" + section.id;
+      }
+    });
+    links.forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === currentId);
+    });
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+});
+</script>
