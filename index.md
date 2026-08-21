@@ -1119,6 +1119,9 @@ This section is dedicated to methods of protecting and preserving the robot as t
 - I love them both
 - They have their strengths and weaknesses
 
+Courtesy of my friend who brought up these similarities:
+<img width="100%"  src="https://github.com/user-attachments/assets/70bd89de-4f09-4db7-adc1-36277c4e65d3" />
+
 </div>
 </div>
 
