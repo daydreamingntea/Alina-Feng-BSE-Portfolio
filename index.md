@@ -141,7 +141,7 @@ The "power" button is incredibly sensitive, so the user must be very careful whe
 
 Since the tone() function occupies Timer2, but the IR remote also uses Timer2, sequence of sounds for R2-D2 function must be written out manually. The sequence is built one event at a time while an update is called every loop. This allows the R2-D2 sounds to play even while the car is driving (same logic that was used for the passive piezo buzzer). I also added a section in the code so that when R2-D2 sound plays, it will interrupt the normal piezo buzzer sound (if it was playing) until the sequence is completed. 
 
-*Note: for post BlueStamp modifications, see section titled "Post BlueStamp Progress" below starter project.*
+*For post BlueStamp modifications, see section titled "Post BlueStamp Modifications and Status".*
 
 # Third Milestone
 
@@ -210,7 +210,9 @@ The robot's shell is also rubbing against one of the wheels, which hinders the w
 
 # Schematics 
 
-*Notes: The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself or on the different views of the circuit. Some wires are striped to help differentiate between wires of other components along with ground and power. Some parts could not be found in Fritzing so I used other components to mimic the wiring of the original part. A L293D motor driver was used to mimic the wire placement on the L9110 motor driver and a different type of passive piezo buzzer with three legs was used instead of a buzzer with only two legs.*
+The color coding on the schematic is to help distinguish the wires of different components and the colors may not match with the ones on the robot itself or on the different views of the circuit. Some wires are striped to help differentiate between wires of other components along with ground and power. 
+
+Some parts could not be found in Fritzing so I used other components to mimic the wiring of the original part. A L293D motor driver was used to mimic the wire placement on the L9110 motor driver and a different type of passive piezo buzzer with three legs was used instead of a buzzer with only two legs.
 
 Breadboard view:
 <img alt="breadboard_view" src="https://github.com/user-attachments/assets/01547e19-5cab-4ada-ad4e-c77a708bf039" style="max-width: 100%; height: auto; display: block;" />
@@ -952,7 +954,7 @@ Below is the layout of the IR remote used for this robot. I included the names o
 | **7** (turn left back) | **8** (drive backward) | **9** (turn right back) |
 | | | |
 
-**Side notes:**
+## Side Notes
  - Pressing "POWER" once will lock all other buttons, pressing it again will unlock
      - Pressing "POWER" will also terminate any already running commands
      - This button is very sensitive
